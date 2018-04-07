@@ -1,9 +1,9 @@
-import { SettingsService } from '@delon/theme';
-import { Component, OnDestroy, Inject, Optional } from '@angular/core';
+import { SettingsService, _HttpClient } from '@delon/theme';
+import { Component, OnDestroy, Inject, Optional} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { SocialService, SocialOpenType, TokenService, DA_SERVICE_TOKEN } from '@delon/auth';
+import { SocialService, SocialOpenType, TokenService, DA_SERVICE_TOKEN} from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
 
@@ -27,10 +27,11 @@ export class UserLoginComponent implements OnDestroy {
         private modalSrv: NzModalService,
         private settingsService: SettingsService,
         private socialService: SocialService,
+        private http: _HttpClient,
         @Optional() @Inject(ReuseTabService) private reuseTabService: ReuseTabService,
         @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService) {
         this.form = fb.group({
-            userName: [null, [Validators.required, Validators.minLength(5)]],
+            userName: [null, [Validators.required, Validators.minLength(3)]],
             password: [null, Validators.required],
             mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
             captcha: [null, [Validators.required]],
@@ -88,22 +89,23 @@ export class UserLoginComponent implements OnDestroy {
         setTimeout(() => {
             this.loading = false;
             if (this.type === 0) {
-                if (this.userName.value !== 'admin' || this.password.value !== '888888') {
-                    this.error = `账户或密码错误`;
-                    return;
-                }
+                this.http.post<{code: string,msg: string, result: {token: string}}>('/login',null,
+                    {userName:this.userName.value,password:this.password.value})
+                    .subscribe(response => {
+                            // 清空路由复用信息
+                            this.reuseTabService.clear();
+                            this.tokenService.set({
+                                token: response.result.token,
+                                name: this.userName.value,
+                                id: 10000,
+                                time: +new Date
+                            });
+                        this.router.navigate(['/']);
+                    },
+                        err => console.log(err),
+                        () => console.log('finish'));
             }
 
-            // 清空路由复用信息
-            this.reuseTabService.clear();
-            this.tokenService.set({
-                token: '123456789',
-                name: this.userName.value,
-                email: `cipchk@qq.com`,
-                id: 10000,
-                time: +new Date
-            });
-            this.router.navigate(['/']);
         }, 1000);
     }
 

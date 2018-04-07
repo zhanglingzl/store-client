@@ -28,7 +28,8 @@ import { DelonCacheModule } from '@delon/cache';
 import { DelonAuthConfig } from '@delon/auth';
 export function delonAuthConfig(): DelonAuthConfig {
     return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
-        login_url: '/passport/login'
+        login_url: '/passport/login',
+        ignores: [ /\/login/, /assets\// ]
     });
 }
 
@@ -43,7 +44,7 @@ export function delonAuthConfig(): DelonAuthConfig {
         DelonACLModule.forRoot(),
         DelonCacheModule.forRoot(),
         // mock
-        ...MOCKMODULE 
+        ...MOCKMODULE
     ]
 })
 export class DelonModule {
