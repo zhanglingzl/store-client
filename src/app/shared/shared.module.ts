@@ -10,10 +10,12 @@ import { DelonACLModule } from '@delon/acl';
 // region: third libs
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CountdownModule } from 'ngx-countdown';
+import {NzSchemaFormModule} from "nz-schema-form";
 
 const THIRDMODULES = [
     NgZorroAntdModule,
-    CountdownModule
+    CountdownModule,
+    NzSchemaFormModule
 ];
 // endregion
 

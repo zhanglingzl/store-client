@@ -27,6 +27,11 @@ const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘' } },
             // 业务子模块
             // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
+            { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+            { path: 'agency', loadChildren: './agency/agency.module#AgencyModule'},
+            { path: 'guest', loadChildren: './guest/guest.module#GuestModule'},
+            { path: 'product', loadChildren: './product/product.module#ProductModule'},
+            { path: 'train', loadChildren: './train/train.module#TrainModule'}
         ]
     },
     // 全屏布局

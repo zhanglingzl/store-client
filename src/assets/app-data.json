@@ -1,0 +1,97 @@
+{
+    "app": {
+        "name": "RXR",
+        "description": "RXR"
+    },
+    "user": {
+        "name": "Admin",
+        "avatar": "./assets/img/avatar.jpg",
+        "email": "test@qq.com"
+    },
+    "menu": [{
+        "text": "主导航",
+        "group": true,
+        "hideInBreadcrumb": true,
+        "children": [
+            {
+                "text": "仪表盘",
+                "link": "/dashboard",
+                "icon": "icon-speedometer"
+            },
+            {
+                "text": "后台管理",
+                "icon": "icon-people",
+                "children": [
+                    {
+                        "text": "用户管理",
+                        "link": "/admin/user"
+                    },
+                    {
+                        "text": "模块管理",
+                        "link": "/admin/module"
+                    },
+                    {
+                        "text": "角色管理",
+                        "link": "/admin/role"
+                    }
+                ]
+            },
+            {
+                "text": "代理管理",
+                "icon": "icon-diamond",
+                "children": [
+                    {
+                        "text": "在职代理",
+                        "link": "/agency"
+                    },
+                    {
+                        "text": "准代理",
+                        "link": "/agency/payroll"
+                    },
+                    {
+                        "text": "代理升级",
+                        "link": "/agency/quasi"
+                    }
+                ]
+            },
+            {
+                "text": "散户管理",
+                "icon": "icon-user",
+                "children": [
+                    {
+                        "text": "散户总览",
+                        "link": "/guest"
+                    }
+                ]
+            },
+            {
+                "text": "商品管理",
+                "icon": "icon-map",
+                "children": [
+                    {
+                        "text": "商品展示",
+                        "link": "/product"
+                    },
+                    {
+                        "text": "代理进货",
+                        "link": "/product/agency"
+                    }
+                ]
+            },
+            {
+                "text": "培训资料",
+                "icon": "icon-book-open",
+                "children": [
+                    {
+                        "text": "文字培训",
+                        "link": "/train/text"
+                    },
+                    {
+                        "text": "视频培训",
+                        "link": "/train/video"
+                    }
+                ]
+            }
+        ]
+    }]
+}

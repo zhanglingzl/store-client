@@ -13,6 +13,10 @@ import { StartupService } from '@core/startup/startup.service';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 import {DelonAuthModule, JWTInterceptor, SimpleInterceptor} from '@delon/auth';
 // angular i18n
+
+// JSON-Schema form
+import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
+
 import { registerLocaleData } from '@angular/common';
 import localeZhHans from '@angular/common/locales/zh-Hans';
 registerLocaleData(localeZhHans);
@@ -35,6 +39,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         SharedModule,
         LayoutModule,
         DelonAuthModule.forRoot(),
+        JsonSchemaModule,
         RoutesModule
     ],
     providers: [

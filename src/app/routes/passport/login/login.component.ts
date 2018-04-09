@@ -89,7 +89,7 @@ export class UserLoginComponent implements OnDestroy {
         setTimeout(() => {
             this.loading = false;
             if (this.type === 0) {
-                this.http.post<{code: string,msg: string, result: {token: string}}>('/login',null,
+                this.http.post<{code: string,msg: string, result: {token: string}}>('http://localhost:8080/login',null,
                     {userName:this.userName.value,password:this.password.value})
                     .subscribe(response => {
                             // 清空路由复用信息
@@ -100,9 +100,13 @@ export class UserLoginComponent implements OnDestroy {
                                 id: 10000,
                                 time: +new Date
                             });
+
                         this.router.navigate(['/']);
                     },
-                        err => console.log(err),
+                        err => {
+                            this.msg.error(err);
+                            console.log(err);
+                        },
                         () => console.log('finish'));
             }
 
