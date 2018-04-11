@@ -24,15 +24,15 @@
                 "children": [
                     {
                         "text": "用户管理",
-                        "link": "/admin/user"
+                        "link": "/system/user"
                     },
                     {
                         "text": "模块管理",
-                        "link": "/admin/module"
+                        "link": "/system/module"
                     },
                     {
                         "text": "角色管理",
-                        "link": "/admin/role"
+                        "link": "/system/role"
                     }
                 ]
             },
@@ -46,7 +46,7 @@
                     },
                     {
                         "text": "准代理",
-                        "link": "/agency/payroll"
+                        "link": "/agency/in-server"
                     },
                     {
                         "text": "代理升级",

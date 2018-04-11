@@ -89,8 +89,8 @@ export class UserLoginComponent implements OnDestroy {
         setTimeout(() => {
             this.loading = false;
             if (this.type === 0) {
-                this.http.post<{code: string,msg: string, result: {token: string}}>('http://localhost:8080/login',null,
-                    {userName:this.userName.value,password:this.password.value})
+                this.http.post<{code: string, msg: string, result: {token: string}}>('http://localhost:8080/login', null,
+                    {userName: this.userName.value, password: this.password.value})
                     .subscribe(response => {
                             // 清空路由复用信息
                             this.reuseTabService.clear();

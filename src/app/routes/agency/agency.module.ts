@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
-import {SharedModule} from '@shared/shared.module';
-import {AgencyRoutingModule} from './agency-routing.module';
-import {AgencyListComponent} from './agency-list/agency-list.component';
-import {AgencyPayrollListComponent} from './payroll-agency-list/agency-payroll-list.component';
-import {QuasiAgencyListComponent} from './quasi-agency-list/quasi-agency-list.component';
+import { NgModule } from '@angular/core';
+import { SharedModule } from '@shared/shared.module';
+import { AgencyRoutingModule } from './agency-routing.module';
+import { AgencyListComponent } from './agency-list/agency-list.component';
+import { QuasiAgencyListComponent } from './quasi-agency-list/quasi-agency-list.component';
+import { InServerAgencyListComponent } from './in-server-agency-list/in-server-agency-list.component';
 
 const COMPONENT_NOROUNT = [
     AgencyListComponent,
-    AgencyPayrollListComponent,
+    InServerAgencyListComponent,
     QuasiAgencyListComponent
 ];
 
@@ -17,7 +17,7 @@ const COMPONENT_NOROUNT = [
     AgencyRoutingModule
   ],
   declarations: [
-      ...COMPONENT_NOROUNT,
+      ...COMPONENT_NOROUNT
   ],
   entryComponents: COMPONENT_NOROUNT
 })

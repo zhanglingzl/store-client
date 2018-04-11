@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
 })
-export class ProductListComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
     constructor(
         private http: _HttpClient

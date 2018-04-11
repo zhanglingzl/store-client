@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {TextTrainListComponent} from "./text-train-list/text-train-list.component";
-import {VideoTrainListComponent} from "./video-train-list/video-train-list.component";
+import {TrainTextComponent} from './train-text/train-text.component';
+import {TrainVideoComponent} from './train-video/train-video.component';
 
 const routes: Routes = [
-    {path: "text", component: TextTrainListComponent},
-    {path: 'video', component: VideoTrainListComponent}
+    { path: 'text', component: TrainTextComponent },
+    { path: 'video', component: TrainVideoComponent }
 ];
 
 @NgModule({
