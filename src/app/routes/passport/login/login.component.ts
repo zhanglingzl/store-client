@@ -6,6 +6,9 @@ import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { SocialService, SocialOpenType, TokenService, DA_SERVICE_TOKEN} from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
+import {StartupService} from "@core/startup/startup.service";
+import {RestResponse} from "../../../common/entities/rest-response";
+import {User} from "../../../common/entities/user";
 
 @Component({
     selector: 'passport-login',
@@ -28,6 +31,7 @@ export class UserLoginComponent implements OnDestroy {
         private settingsService: SettingsService,
         private socialService: SocialService,
         private http: _HttpClient,
+        private startupService: StartupService,
         @Optional() @Inject(ReuseTabService) private reuseTabService: ReuseTabService,
         @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService) {
         this.form = fb.group({
@@ -89,19 +93,21 @@ export class UserLoginComponent implements OnDestroy {
         setTimeout(() => {
             this.loading = false;
             if (this.type === 0) {
-                this.http.post<{code: string, msg: string, result: {token: string}}>('http://localhost:8080/login', null,
+                this.http.post<RestResponse<User>>('/login', null,
                     {userName: this.userName.value, password: this.password.value})
                     .subscribe(response => {
-                            // 清空路由复用信息
-                            this.reuseTabService.clear();
-                            this.tokenService.set({
-                                token: response.result.token,
-                                name: this.userName.value,
-                                id: 10000,
-                                time: +new Date
-                            });
+                        // 清空路由复用信息
+                        this.reuseTabService.clear();
+                        this.tokenService.set({
+                            token: response.result.token,
+                            name: this.userName.value,
+                            id: 10000,
+                            time: +new Date
+                        });
+                        this.startupService.load().then(_ => {
+                            this.router.navigate(['/']);
+                        });
 
-                        this.router.navigate(['/']);
                     },
                         err => {
                             this.msg.error(err);
