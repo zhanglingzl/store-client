@@ -7,7 +7,7 @@ import { SocialService, SocialOpenType, TokenService, DA_SERVICE_TOKEN} from '@d
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
 import {StartupService} from "@core/startup/startup.service";
-import {RestResponse} from "../../../common/entities/rest-response";
+import {RestResponse} from "../../../common/dto/rest-response";
 import {User} from "../../../common/entities/user";
 
 @Component({

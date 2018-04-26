@@ -1,3 +1,7 @@
 <div class="content__title">
     <h1>Page Name</h1>
 </div>
+<simple-table [data]="url" [extraParams]="params" [total]="total" [columns]="columns"
+              [pi]="3"
+              [preDataChange]="dataChange" [resReName]="{list: 'results' }"
+              (radioChange)="radioChange($event)"></simple-table>
