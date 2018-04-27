@@ -16,7 +16,7 @@ export class LayoutDefaultComponent {
         private _message: NzMessageService,
         public menuSrv: MenuService,
         public settings: SettingsService) {
-        // scroll to top in change page
+        // scroll to top in change page.ts
         router.events.subscribe(evt => {
             if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
                 this.isFetching = true;

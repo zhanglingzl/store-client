@@ -5,6 +5,6 @@ export class User {
     state: number;
     telephone: string;
     wechat: string;
-    token: string;
     password?: string;
+    token?: string;
 }

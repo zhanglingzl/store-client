@@ -4,6 +4,8 @@ export class UserForm extends BaseForm {
     loginName: string;
     telephone: string;
     wechart: string;
-    status: string|number;
+    state: number;
+    startTime: string;
+    endTime: string;
     statusList: any[];
 }
