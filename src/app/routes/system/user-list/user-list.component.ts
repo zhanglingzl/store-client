@@ -1,58 +1,37 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SimpleTableButton, SimpleTableColumn, SimpleTableComponent} from "@delon/abc";
-import {NzMessageService} from "ng-zorro-antd";
+import {NzMessageService, NzModalService} from "ng-zorro-antd";
 
 
-import {PageData, UserForm} from "../../../common/dto";
-import {User} from "../../../common/entities";
-import {of} from "rxjs/observable/of";
-import {delay} from "rxjs/operators";
-import {SimpleTableChange} from "@delon/abc/src/simple-table/interface";
+import {UserForm} from "../../../common/dto";
+import {_HttpClient} from "@delon/theme";
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
 })
 export class UserListComponent implements OnInit {
-    pageData: PageData<User[]> = new PageData<User[]>();
+    url: string = `/user`;
     query: UserForm = new UserForm();
     @ViewChild('st') st: SimpleTableComponent;
 
     ngOnInit(): void {
-
-        of(Array(95).fill({}).map((item: User, idx: number) => {
-            item = {
-                id: idx+1,
-                loginName: `ceshi${idx+1}`,
-                name: `测试${idx+1}`,
-                state: 1,
-                telephone: `123000123-${idx+1}`,
-                wechat: `wechat-${idx+1}`
-
-            };
-            return item;
-        })).pipe(delay(500)).subscribe(res => {
-            this.pageData = {
-                pageination: {
-                    pageNumber: 10,
-                    pageSize: 2,
-                    total: 95
-                },
-                data: res
-            };
-        });
     }
 
-    constructor(private message: NzMessageService) {}
+    constructor(private http: _HttpClient,
+                public message: NzMessageService,
+                private modalSrv: NzModalService) {}
 
 
     columns: SimpleTableColumn[] = [
         { title: '编号', index: 'id.value', type: 'radio'},
-        { title: '登录名', index: 'loginName' },
-        { title: '用户名', index: 'name' },
+        { title: '登录名', index: 'loginName', sorter: (a, b) => true, sortKey: 'direction', sort:"ascend"},
+        { title: '用户名', index: 'name',  sorter: (a, b) => true, sortKey: 'direction'},
         { title: '状态', index: 'state' },
         { title: '电话', index: 'telephone' },
         { title: '微信', index: 'wechat' },
+        { title: '创建时间', index: 'createTime', type: 'date' },
+        { title: '创建人', index: 'createOperator' },
         {
             title: '操作区',
             buttons: [
@@ -87,9 +66,7 @@ export class UserListComponent implements OnInit {
             ]
         }
     ];
-
-    getData( stc: SimpleTableChange): void {
-       alert(stc.pi);
-        alert(stc.ps);
+    sortChange(ret: any) {
+        this.query.sorter=ret.column.indexKey;
     }
 }

@@ -1,9 +1,9 @@
 <page-header [title]="'管理员列表'"></page-header>
 <nz-card [nzBordered]="false">
-    <simple-table #st [data]="pageData.data" [ps]="pageData.pageination.pageSize"
-                  [pi]="pageData.pageination.pageNumber"
-                  [columns]="columns" [total]="pageData.pageination.total"
-                  (change)="getData($event)"
+    <simple-table #st [data]="url" [extraParams]="query" [reqReName]="{pi: 'pageNumber', ps: 'pageSize'}"
+                  [columns]="columns" [ps]="1" [sortReName]="{ascend: 'ASC', descend: 'DESC'}"
+                  (sortChange)="sortChange($event)"
+                  [resReName]="{list: 'result.data', total: 'result.pagination.total'}"
                   showQuickJumper showSizeChanger>
     </simple-table>
 </nz-card>

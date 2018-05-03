@@ -7,4 +7,8 @@ export class User {
     wechat: string;
     password?: string;
     token?: string;
+    createOperator?: string;
+    createTime?: Date;
+    updateOperator: string;
+    updateTime?: Date;
 }
