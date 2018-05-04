@@ -1,10 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SimpleTableButton, SimpleTableColumn, SimpleTableComponent} from "@delon/abc";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
-
-
-import {UserForm} from "../../../common/dto";
 import {_HttpClient} from "@delon/theme";
+import {UserForm} from "../../../common/dto";
 
 @Component({
   selector: 'app-user-list',
@@ -12,10 +10,14 @@ import {_HttpClient} from "@delon/theme";
 })
 export class UserListComponent implements OnInit {
     url: string = `/user`;
-    query: UserForm = new UserForm();
+    query: UserForm;
+    loading:boolean = false;
+    expandForm:boolean = false;
     @ViewChild('st') st: SimpleTableComponent;
 
     ngOnInit(): void {
+        this.query = new UserForm();
+        this.query.sorter='loginName';
     }
 
     constructor(private http: _HttpClient,
@@ -66,7 +68,28 @@ export class UserListComponent implements OnInit {
             ]
         }
     ];
+
     sortChange(ret: any) {
         this.query.sorter=ret.column.indexKey;
     }
+
+    reset(): void {
+       const sorter = this.query.sorter;
+       this.query = new UserForm();
+       this.query.sorter = sorter;
+        this.st.reset(this.query);
+        console.log(this.query);
+
+    }
+
+    submit(): void {
+        this.loading=true;
+        this.st.load(1,this.query);
+        // this.loading=false;
+    }
+
+    dataChange() {
+
+    }
+
 }

@@ -32,8 +32,8 @@ export class StartupService {
                 return [appData];
             })
         ).subscribe(([appData]) => {
-            const tokenData = this.tokenService.get<JWTTokenModel>();
-            if (!tokenData.token) {
+            const tokenData = this.tokenService.get<JWTTokenModel>(JWTTokenModel);
+            if (!tokenData.token || tokenData.isExpired()) {
                 this.injector.get(Router).navigateByUrl('/passport/login');
                 resolve({});
                 return;

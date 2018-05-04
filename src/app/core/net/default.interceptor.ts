@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import {Inject, Injectable, Injector} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse,
          HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent,
@@ -10,6 +10,7 @@ import { mergeMap, catchError } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
+import {DA_SERVICE_TOKEN, ITokenService, JWTTokenModel} from "@delon/auth";
 
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
@@ -57,7 +58,6 @@ export class DefaultInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
-
         // 统一加上服务端前缀
         let url = req.url;
         if (!url.startsWith('https://') && !url.startsWith('http://')) {
