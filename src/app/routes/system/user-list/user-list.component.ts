@@ -1,23 +1,24 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {SimpleTableButton, SimpleTableColumn, SimpleTableComponent} from "@delon/abc";
-import {NzMessageService, NzModalService} from "ng-zorro-antd";
-import {_HttpClient} from "@delon/theme";
-import {UserForm} from "../../../common/dto";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SimpleTableButton, SimpleTableColumn, SimpleTableComponent } from '@delon/abc';
+import { _HttpClient } from '@delon/theme';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { UserForm } from '../../../common/dto';
+
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
 })
 export class UserListComponent implements OnInit {
-    url: string = `/user`;
+    url = `/user`;
     query: UserForm;
-    loading:boolean = false;
-    expandForm:boolean = false;
+    loading = false;
+    expandForm = false;
     @ViewChild('st') st: SimpleTableComponent;
 
     ngOnInit(): void {
         this.query = new UserForm();
-        this.query.sorter='loginName';
+        this.query.sorter = 'loginName';
     }
 
     constructor(private http: _HttpClient,
@@ -27,7 +28,7 @@ export class UserListComponent implements OnInit {
 
     columns: SimpleTableColumn[] = [
         { title: '编号', index: 'id.value', type: 'radio'},
-        { title: '登录名', index: 'loginName', sorter: (a, b) => true, sortKey: 'direction', sort:"ascend"},
+        { title: '登录名', index: 'loginName', sorter: (a, b) => true, sortKey: 'direction', sort: 'ascend'},
         { title: '用户名', index: 'name',  sorter: (a, b) => true, sortKey: 'direction'},
         { title: '状态', index: 'state' },
         { title: '电话', index: 'telephone' },
@@ -70,7 +71,7 @@ export class UserListComponent implements OnInit {
     ];
 
     sortChange(ret: any) {
-        this.query.sorter=ret.column.indexKey;
+        this.query.sorter = ret.column.indexKey;
     }
 
     reset(): void {
@@ -83,9 +84,9 @@ export class UserListComponent implements OnInit {
     }
 
     submit(): void {
-        this.loading=true;
-        this.st.load(1,this.query);
-        // this.loading=false;
+        this.loading = true;
+        this.st.load(1, this.query);
+        this.loading = false;
     }
 
     dataChange() {

@@ -22,30 +22,29 @@ import { DelonCacheModule } from '@delon/cache';
 
 // import { AdPageHeaderConfig } from '@delon/abc';
 // export function pageHeaderConfig(): AdPageHeaderConfig {
-//     return Object.assign(new AdPageHeaderConfig(), { home_i18n: 'home' });
+//   return Object.assign(new AdPageHeaderConfig(), { home_i18n: 'home' });
 // }
 
 import { DelonAuthConfig } from '@delon/auth';
 export function delonAuthConfig(): DelonAuthConfig {
-    return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
-        login_url: '/passport/login',
-        ignores: [ /\/login/, /assets\// ]
-    });
+  return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
+    login_url: '/passport/login'
+  });
 }
 
 // endregion
 
 @NgModule({
-    imports: [
-        NgZorroAntdModule.forRoot(),
-        AlainThemeModule.forRoot(),
-        DelonABCModule.forRoot(),
-        DelonAuthModule.forRoot(),
-        DelonACLModule.forRoot(),
-        DelonCacheModule.forRoot(),
-        // mock
-        ...MOCKMODULE
-    ]
+  imports: [
+    NgZorroAntdModule.forRoot(),
+    AlainThemeModule.forRoot(),
+    DelonABCModule.forRoot(),
+    DelonAuthModule.forRoot(),
+    DelonACLModule.forRoot(),
+    DelonCacheModule.forRoot(),
+    // mock
+    ...MOCKMODULE 
+  ]
 })
 export class DelonModule {
   constructor( @Optional() @SkipSelf() parentModule: DelonModule) {
@@ -53,14 +52,14 @@ export class DelonModule {
   }
 
   static forRoot(): ModuleWithProviders {
-      return {
-          ngModule: DelonModule,
-          providers: [
-                // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `simple-table` 的页码默认为 `20` 行
-                // { provide: AdSimpleTableConfig, useFactory: simpleTableConfig }
-                // { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
-                { provide: DelonAuthConfig, useFactory: delonAuthConfig}
-          ]
-      };
+    return {
+      ngModule: DelonModule,
+      providers: [
+        // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `simple-table` 的页码默认为 `20` 行
+        // { provide: AdSimpleTableConfig, useFactory: simpleTableConfig }
+        // { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
+        { provide: DelonAuthConfig, useFactory: delonAuthConfig}
+      ]
+    };
   }
 }
