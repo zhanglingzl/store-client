@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ng-alain App', () => {
+describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {

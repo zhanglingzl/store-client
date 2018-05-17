@@ -1,22 +1,21 @@
-import {
-  HttpErrorResponse,
-  HttpHandler,
-  HttpHeaderResponse,
-  HttpInterceptor,
-  HttpProgressEvent,
-  HttpRequest,
-  HttpResponse,
-  HttpSentEvent,
-  HttpUserEvent,
-} from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpErrorResponse,
+  HttpSentEvent,
+  HttpHeaderResponse,
+  HttpProgressEvent,
+  HttpResponse,
+  HttpUserEvent,
+} from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { mergeMap, catchError } from 'rxjs/operators';
+import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
-import { NzMessageService } from 'ng-zorro-antd';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError, mergeMap } from 'rxjs/operators';
 
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
@@ -97,7 +96,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = environment.SERVER_URL + url;
     }
-    console.log(url);
+
     const newReq = req.clone({
       url: url,
     });

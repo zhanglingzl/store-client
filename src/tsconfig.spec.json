@@ -2,9 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
-    "baseUrl": "./",
     "module": "commonjs",
-    "target": "es5",
     "types": [
       "jasmine",
       "node"
@@ -17,27 +15,29 @@
         "app/shared/*"
       ],
       "@core": [
-        "app/core/"
+        "app/core"
       ],
       "@core/*": [
         "app/core/*"
       ],
       "@testing": [
-        "testing/"
+        "testing"
       ],
       "@testing/*": [
         "testing/*"
       ],
       "@env": [
-        "environments/"
+        "environments"
       ],
       "@env/*": [
         "environments/*"
       ]
-    }
+    },
+    "baseUrl": "./"
   },
   "files": [
-    "test.ts"
+    "test.ts",
+    "polyfills.ts"
   ],
   "include": [
     "**/*.spec.ts",

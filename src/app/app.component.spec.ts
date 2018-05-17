@@ -6,10 +6,8 @@ import { AppComponent } from './app.component';
 
 describe('Component: App', () => {
   setUpTestBed(<TestModuleMetadata>{
-    declarations: [ AppComponent ],
-    providers: [
-      { provide: APP_BASE_HREF, useValue: '/' }
-    ]
+    declarations: [AppComponent],
+    providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   });
 
   it('should create the app', () => {

@@ -8,9 +8,12 @@ const total = 50;
 for (let i = 0; i < total; i += 1) {
   list.push({
     id: i + 1,
-    disabled: ((i % 6) === 0),
+    disabled: i % 6 === 0,
     href: 'https://ant.design',
-    avatar: ['https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png', 'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png'][i % 2],
+    avatar: [
+      'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
+      'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png',
+    ][i % 2],
     no: `TradeCode ${i}`,
     title: `一个任务名称 ${i}`,
     owner: '曲丽丽',
@@ -38,25 +41,29 @@ function genData(params: any) {
 
 function saveData(id: number, value: any) {
   const item = list.find(w => w.id === id);
-  if (!item) return { msg: '无效用户信息' };
+  if (!item) {
+    return { msg: '无效用户信息' };
+  }
   Object.assign(item, value);
   return { msg: 'ok' };
 }
 
 export const USERS = {
-  '/_user': (req: MockRequest) => genData(req.queryString),
-  '/_user/:id': (req: MockRequest) => list.find(w => w.id === +req.params.id),
-  'POST /_user/:id': (req: MockRequest) => saveData(+req.params.id, req.body),
+  '/user': (req: MockRequest) => genData(req.queryString),
+  '/user/:id': (req: MockRequest) => list.find(w => w.id === +req.params.id),
+  'POST /user/:id': (req: MockRequest) => saveData(+req.params.id, req.body),
   // 支持值为 Object 和 Array
-  'GET /_users': { users: [1, 2], total: 2 },
+  'GET /users': { users: [1, 2], total: 2 },
   // GET 可省略
   // '/users/1': Mock.mock({ id: 1, 'rank|3': '★★★' }),
   // POST 请求
-  'POST /_users/1': { uid: 1 },
+  'POST /users/1': { uid: 1 },
   // 获取请求参数 queryString、headers、body
   '/qs': (req: MockRequest) => req.queryString.pi,
   // 路由参数
-  '/_users/:id': (req: MockRequest) => req.params, // /users/100, output: { id: 100 }
+  '/users/:id': (req: MockRequest) => req.params, // /users/100, output: { id: 100 }
   // 发送 Status 错误
-  '/_404': () => { throw new MockStatusError(404); }
+  '/404': () => {
+    throw new MockStatusError(404);
+  },
 };

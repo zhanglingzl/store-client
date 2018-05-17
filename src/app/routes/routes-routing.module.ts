@@ -24,14 +24,9 @@ const routes: Routes = [
     component: LayoutDefaultComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘' } },
+      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘', titleI18n: 'dashboard' } },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
-      { path: 'system', loadChildren: './system/system.module#SystemModule' },
-      { path: 'agency', loadChildren: './agency/agency.module#AgencyModule' },
-      { path: 'guest', loadChildren: './guest/guest.module#GuestModule' },
-      { path: 'product', loadChildren: './product/product.module#ProductModule'},
-      { path: 'train', loadChildren: './train/train.module#TrainModule'}
     ]
   },
   // 全屏布局
@@ -46,9 +41,9 @@ const routes: Routes = [
     path: 'passport',
     component: LayoutPassportComponent,
     children: [
-      { path: 'login', component: UserLoginComponent },
-      { path: 'register', component: UserRegisterComponent },
-      { path: 'register-result', component: UserRegisterResultComponent }
+      { path: 'login', component: UserLoginComponent, data: { title: '登录', titleI18n: 'pro-login' } },
+      { path: 'register', component: UserRegisterComponent, data: { title: '注册', titleI18n: 'pro-register' } },
+      { path: 'register-result', component: UserRegisterResultComponent, data: { title: '注册结果', titleI18n: 'pro-register-result' } }
     ]
   },
   // 单页不包裹Layout
