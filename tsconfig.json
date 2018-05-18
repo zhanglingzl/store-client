@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src/",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -15,16 +16,31 @@
       "es2017",
       "dom"
     ],
-    "baseUrl": "src/",
     "paths": {
-        "@shared": [ "app/shared" ],
-        "@shared/*": [ "app/shared/*" ],
-        "@core": [ "app/core/" ],
-        "@core/*": [ "app/core/*" ],
-        "@testing": [ "testing/" ],
-        "@testing/*": [ "testing/*" ],
-        "@env": [ "environments/" ],
-        "@env/*": [ "environments/*" ]
+      "@shared": [
+        "app/shared"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@core": [
+        "app/core"
+      ],
+      "@core/*": [
+        "app/core/*"
+      ],
+      "@testing": [
+        "testing"
+      ],
+      "@testing/*": [
+        "testing/*"
+      ],
+      "@env": [
+        "environments"
+      ],
+      "@env/*": [
+        "environments/*"
+      ]
     }
   }
 }
