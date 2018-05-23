@@ -24,15 +24,15 @@
                 "children": [
                     {
                         "text": "用户管理",
-                        "link": "/system/user"
+                        "link": "/admin/user"
                     },
                     {
                         "text": "模块管理",
-                        "link": "/system/module"
+                        "link": "/admin/module"
                     },
                     {
                         "text": "角色管理",
-                        "link": "/system/role"
+                        "link": "/admin/role"
                     }
                 ]
             },

@@ -27,6 +27,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘', titleI18n: 'dashboard' } },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
+      { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
     ]
   },
   // 全屏布局

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { zip } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MenuService, SettingsService, TitleService, ALAIN_I18N_TOKEN } from '@delon/theme';
-import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
+import { DA_SERVICE_TOKEN, ITokenService, JWTTokenModel } from '@delon/auth';
 import { ACLService } from '@delon/acl';
 
 /**
@@ -25,7 +25,7 @@ export class StartupService {
 
   private viaHttp(resolve: any, reject: any) {
     zip(
-      this.httpClient.get('assets/tmp/app-data.json')
+      this.httpClient.get('http://localhost:4200/assets/tmp/app-data.json')
     ).pipe(
       // 接收其他拦截器后产生的异常消息
       catchError(([appData]) => {
@@ -33,7 +33,12 @@ export class StartupService {
           return [appData];
       })
     ).subscribe(([appData]) => {
-
+        const tokenData = this.tokenService.get<JWTTokenModel >(JWTTokenModel);
+        if (!tokenData.token) {
+          this.injector.get(Router).navigateByUrl('/passport/login');
+          resolve({});
+          return;
+        }
       // application data
       const res: any = appData;
       // 应用信息：包括站点名、描述、年份
