@@ -3,30 +3,22 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   import { _HttpClient } from '@delon/theme';
   import { SFSchema, SFUISchema } from '@delon/form';
 
-import { RestResponse } from '../../../../dto';
-import { User } from '../../../../model';
-
   @Component({
     selector: 'app-user-edit',
     templateUrl: './user-edit.component.html'
   })
   export class UserEditComponent implements OnInit {
     record: any = {};
-    user: User;
+    i: any;
     schema: SFSchema = {
-
       properties: {
-        loginName: { type: 'string', title: '登陆名', readOnly: true },
-
-      }
-      // properties: {
-      //   no: { type: 'string', title: '编号', readOnly: true },
-      //   loginName: { type: 'string', title: '姓名', maxLength: 15 },
-      //   callNo: { type: 'number', title: '调用次数' },
-      //   href: { type: 'string', title: '链接', format: 'uri' },
-      //   description: { type: 'string', title: '描述', maxLength: 140 },
-      // },
-      // required: ['owner', 'callNo', 'href', 'description'],
+        no: { type: 'string', title: '编号', readOnly: true },
+        owner: { type: 'string', title: '姓名', maxLength: 15 },
+        callNo: { type: 'number', title: '调用次数' },
+        href: { type: 'string', title: '链接', format: 'uri' },
+        description: { type: 'string', title: '描述', maxLength: 140 },
+      },
+      required: ['owner', 'callNo', 'href', 'description'],
     };
     ui: SFUISchema = {
       '*': {
@@ -49,8 +41,7 @@ import { User } from '../../../../model';
     ) {}
 
     ngOnInit(): void {
-      this.http.get<RestResponse<User>>(`/user/${this.record.id}`)
-        .subscribe(res => (this.user = res.result));
+      this.http.get(`/user/${this.record.id}`).subscribe(res => (this.i = res));
     }
 
     save(value: any) {

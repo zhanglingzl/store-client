@@ -1,24 +1,17 @@
 // from: https://github.com/angular/angular/issues/12409
 
-import { TestBed, async, TestModuleMetadata } from '@angular/core/testing';
-import { Type, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
+import { TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-
-import {
-  ALAIN_I18N_TOKEN,
-  SettingsService,
-  MenuService,
-  ScrollService,
-  _HttpClient,
-} from '@delon/theme';
-import { DelonAuthModule } from '@delon/auth';
 import { I18NService } from '@core/i18n/i18n.service';
-import { CoreModule } from '@core/core.module';
+import { DelonAuthModule } from '@delon/auth';
+
+import { _HttpClient, ALAIN_I18N_TOKEN, MenuService, ScrollService, SettingsService, } from '@delon/theme';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
-import { DelonModule } from '../app/delon.module';
 import { HttpLoaderFactory } from '../app/app.module';
+import { DelonModule } from '../app/delon.module';
 
 const resetTestingModule = TestBed.resetTestingModule,
   preventAngularFromResetting = () =>
