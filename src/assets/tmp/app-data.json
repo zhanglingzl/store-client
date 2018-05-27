@@ -14,7 +14,7 @@
         "hideInBreadcrumb": true,
         "children": [
             {
-                "text": "仪表盘",
+                "text": "主页",
                 "link": "/dashboard",
                 "icon": "icon-speedometer"
             },
@@ -42,7 +42,7 @@
                 "children": [
                     {
                         "text": "在职代理",
-                        "link": "/agency"
+                        "link": "/agency/job"
                     },
                     {
                         "text": "准代理",

@@ -17,6 +17,8 @@ import { UserLockComponent } from './passport/lock/lock.component';
 import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
+import {ProductModule} from './store/product/product.module';
+import {TrainModule} from './store/train/train.module';
 
 const routes: Routes = [
   {
@@ -24,10 +26,14 @@ const routes: Routes = [
     component: LayoutDefaultComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘', titleI18n: 'dashboard' } },
+      { path: 'dashboard', component: DashboardComponent, data: { title: '主页' } },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
-      { path: 'admin', loadChildren: './store/admin/admin.module#AdminModule'}
+      { path: 'admin', loadChildren: './store/admin/admin.module#AdminModule'},
+      { path: 'agency', loadChildren: './store/agency/agency.module#AgencyModule'},
+      { path: 'guest', loadChildren: './store/guest/guest.module#GuestModule'},
+      { path: 'product', loadChildren: './store/product/product.module#ProductModule'},
+      { path: 'train', loadChildren: './store/train/train.module#TrainModule'}
     ]
   },
   // 全屏布局

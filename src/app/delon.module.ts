@@ -28,7 +28,7 @@ const MOCKMODULE = !environment.production ? [DelonMockModule.forRoot({ data: MO
 
 import { AdPageHeaderConfig } from '@delon/abc';
 export function pageHeaderConfig(): AdPageHeaderConfig {
-  return Object.assign(new AdPageHeaderConfig(), { home_i18n: 'home' });
+  return Object.assign(new AdPageHeaderConfig(), { home_i18n: '主页' });
 }
 
 import { DelonAuthConfig } from '@delon/auth';
