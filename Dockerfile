@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # STEP 2: Setup
-FROM nginx:1.13.5-alpine
+FROM nginx
 
 COPY --from=builder /ng-alain/_nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /ng-alain/_nginx/ssl/* /etc/nginx/ssl/

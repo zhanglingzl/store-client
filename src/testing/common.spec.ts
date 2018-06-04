@@ -4,13 +4,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18NService } from '@core/i18n/i18n.service';
 import { DelonAuthModule } from '@delon/auth';
 
 import { _HttpClient, ALAIN_I18N_TOKEN, MenuService, ScrollService, SettingsService, } from '@delon/theme';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
-import { HttpLoaderFactory } from '../app/app.module';
 import { DelonModule } from '../app/delon.module';
 
 const resetTestingModule = TestBed.resetTestingModule,
@@ -43,13 +40,13 @@ export const setUpTestBed = (moduleDef: TestModuleMetadata) => {
       // auth
       moduleDef.imports.push(DelonAuthModule.forRoot());
       moduleDef.imports.push(
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient],
-          },
-        }),
+        // TranslateModule.forRoot({
+        //   loader: {
+        //     provide: TranslateLoader,
+        //     useFactory: HttpLoaderFactory,
+        //     deps: [HttpClient],
+        //   },
+        // }),
       );
       // endregion
 
@@ -59,7 +56,7 @@ export const setUpTestBed = (moduleDef: TestModuleMetadata) => {
       }
       moduleDef.providers.push({
         provide: ALAIN_I18N_TOKEN,
-        useClass: I18NService,
+        // useClass: I18NService,
         multi: false,
       });
       // load full services

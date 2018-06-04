@@ -7,7 +7,7 @@ import {
   SocialService,
   SocialOpenType,
   TokenService,
-  DA_SERVICE_TOKEN,
+  DA_SERVICE_TOKEN, DelonAuthConfig,
 } from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
@@ -40,6 +40,7 @@ export class UserLoginComponent implements OnDestroy {
     @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
     private startupSrv: StartupService,
     private http: _HttpClient,
+
   ) {
     this.form = fb.group({
       userName: [null, [Validators.required, Validators.minLength(5)]],
