@@ -49,7 +49,7 @@ function saveData(id: number, value: any) {
 }
 
 export const USERS = {
-  '/user': (req: MockRequest) => genData(req.queryString),
+  '/_user': (req: MockRequest) => genData(req.queryString),
   '/user/:id': (req: MockRequest) => list.find(w => w.id === +req.params.id),
   'POST /_user/:id': (req: MockRequest) => saveData(+req.params.id, req.body),
   // 支持值为 Object 和 Array

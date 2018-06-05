@@ -35,7 +35,7 @@ import { DelonAuthConfig } from '@delon/auth';
 export function delonAuthConfig(): DelonAuthConfig {
   return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
     login_url: '/passport/login',
-    ignores: [ /\/login/, /assets\//, /passport\//, /\/wechat\// ]
+    ignores: [ /\/login/, /assets\//, /passport\//, /\/wechat\/auth\// ]
   });
 }
 

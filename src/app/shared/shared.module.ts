@@ -15,7 +15,6 @@ import { WeUiModule } from 'ngx-weui';
 const THIRDMODULES = [
   NgZorroAntdModule,
   CountdownModule,
-  WeUiModule
 ];
 // endregion
 

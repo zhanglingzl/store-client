@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
+import { InfiniteLoaderComponent } from 'ngx-weui';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +13,7 @@ export class RootComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  onLoadMore(comp: InfiniteLoaderComponent) {}
 
 }

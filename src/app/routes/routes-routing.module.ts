@@ -38,7 +38,7 @@ const routes: Routes = [
       path: 'wechat',
       component: LayoutFullScreenComponent,
       children: [
-        {path:'', loadChildren: './wx/wechat/wechat.module#WechatModule'}
+        {path:'', loadChildren: './wechat/wechat.module#WechatModule'}
       ]
   },
   // passport
