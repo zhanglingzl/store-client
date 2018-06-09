@@ -1,0 +1,26 @@
+<page-header [title]="''"></page-header>
+<nz-card>
+  <form nz-form [nzLayout]="'inline'"  class="search__form">
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label  nzFor="name">姓名</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.name" name="name" placeholder="请输入" id="name">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label  nzFor="telephone">手机号</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.telephone" name="telephone" placeholder="请输入" id="telephone">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <button nz-button type="submit" [nzType]="'primary'">查询</button>
+      <button nz-button type="reset"  class="mx-sm" (click)="getData()">重置</button>
+    </nz-row>
+  </form>
+  <simple-table #st [data]="url" [columns]="columns" [extraParams]="params"></simple-table>
+</nz-card>
