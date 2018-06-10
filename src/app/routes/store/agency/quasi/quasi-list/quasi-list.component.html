@@ -1,5 +1,29 @@
+<script src="../../job/job-list/job-list.component.ts"></script>
 <page-header [title]="''"></page-header>
-<!--<nz-card>
-  <sf mode="search" [schema]="searchSchema" [formData]="params" (formSubmit)="st.reset($event)" (formReset)="st.reset(params)"></sf>
-  <simple-table #st [data]="url" [columns]="columns" [extraParams]="params"></simple-table>
-</nz-card>-->
+<nz-card>
+  <form nz-form [nzLayout]="'inline'" (ngSubmit)="getData()" class="search__form">
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label nzFor="name">姓名</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.name" name="name" placeholder="请输入" id="name">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24" >
+        <nz-form-item>
+          <nz-form-label nzFor="callNo">手机号</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.telephone" name="telephone" placeholder="请输入" id="telephone">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col [nzSpan]="8">
+        <button nz-button type="submit"  [nzType]="'primary'">查询</button>
+        <button nz-button (click)="reset()" class="mx-sm">重置</button>
+      </nz-col>
+    </nz-row>
+  </form>
+  <simple-table #st [data]="data" [columns]="columns" [ps]="3" [loading]="loading" [extraParams]="params"></simple-table>
+</nz-card>

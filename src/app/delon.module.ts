@@ -51,7 +51,7 @@ export function delonAuthConfig(): DelonAuthConfig {
     DelonCacheModule.forRoot(),
     DelonUtilModule.forRoot(),
     // mock
-    ...MOCKMODULE,
+    // ...MOCKMODULE,
   ],
 })
 export class DelonModule {

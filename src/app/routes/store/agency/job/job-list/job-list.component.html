@@ -1,5 +1,59 @@
 <page-header [title]="''"></page-header>
 <nz-card>
-  <sf mode="search" [schema]="searchSchema" [formData]="params" (formSubmit)="st.reset($event)" (formReset)="st.reset(params)"></sf>
-  <simple-table #st [data]="url" [columns]="columns" [extraParams]="params"></simple-table>
+
+  <form nz-form [nzLayout]="'inline'" (ngSubmit)="getData()" class="search__form">
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label  nzFor="name">姓名</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.name" name="name" placeholder="请输入" id="name">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label  nzFor="telephone">手机号</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.telephone" name="telephone" placeholder="请输入" id="telephone">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <button nz-button type="submit" [nzType]="'primary'">查询</button>
+      <button nz-button   class="mx-sm" (click)="reset()">重置</button>
+    </nz-row>
+  </form>
+
+  <nz-table #nzTable [nzData]="data">
+    <thead>
+    <tr>
+      <th >姓名</th>
+      <th >性别</th>
+      <th >等级</th>
+      <th >类型</th>
+      <th >手机号</th>
+      <th >微信号</th>
+      <th>地址</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-template ngFor let-data [ngForOf]="nzTable.data">
+      <ng-template ngFor let-item [ngForOf]="expandDataCache[data.id]">
+        <tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+          <td [nzIndentSize]="item.level1*20" [nzShowExpand]="!!item.children && item.children.length >0" [(nzExpand)]="item.expand" (nzExpandChange)="collapse(expandDataCache[data.id],item,$event)">
+            {{item.name}}
+          </td>
+          <td>{{item.gender}}</td>
+          <td>{{item.type}}</td>
+          <td>{{item.level}}</td>
+          <td>{{item.telephone}}</td>
+          <td>{{item.weChatId}}</td>
+          <td>{{item.address}}</td>
+          <td><a href="#">在售商品</a></td>
+        </tr>
+      </ng-template>
+    </ng-template>
+    </tbody>
+  </nz-table>
 </nz-card>
