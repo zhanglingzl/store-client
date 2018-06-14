@@ -10,8 +10,8 @@ import {ProductEditComponent} from '../product-edit/product-edit.component';
 })
 export class ProductListComponent implements OnInit {
 
-  q: any = {
-    ps: 8,
+  params: any = {
+    productName: '',
     categories: [],
   };
 
@@ -52,9 +52,9 @@ export class ProductListComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.http.get('/product/list', { count: this.q.ps }).subscribe((res: any) => {
-      this.list = ['null'];
-      this.list = this.list.concat(res);
+    this.http.get('/product', { productForm: this.params }).subscribe((res: any) => {
+      // this.list = ['null'];
+      this.list = this.list.concat(res.result);
       this.loading = false;
     });
   }
@@ -72,7 +72,7 @@ export class ProductListComponent implements OnInit {
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http
-          .post('/product', {record: modalComponent.i})
+          .post('/product/add', {record: modalComponent.i})
           .subscribe(() => {
             this.getData();
           });
@@ -82,7 +82,7 @@ export class ProductListComponent implements OnInit {
   }
   remove(id) {
     this.http
-      .delete('/product', { id: id })
+      .delete('/product/delete', { id: id })
       .subscribe(() => {
         this.getData();
       });
@@ -101,7 +101,7 @@ export class ProductListComponent implements OnInit {
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http
-          .post('/product/update', {id:item.id,record: modalComponent.i})
+          .put('/product/update', {id:item.id,record: modalComponent.i})
           .subscribe(() => {
             this.getData();
           });

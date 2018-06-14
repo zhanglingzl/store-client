@@ -48,7 +48,7 @@ export class UpgradeListComponent implements OnInit {
    */
   getData() {
     this.loading = true;
-    this.http.get<RestResponse<Agency[]>>('/agency/quasi',this.params).subscribe(response => {
+    this.http.get<RestResponse<Agency[]>>('/agency/upgrade',this.params).subscribe(response => {
       this.data = response.result;
       this.loading = false;
     });
