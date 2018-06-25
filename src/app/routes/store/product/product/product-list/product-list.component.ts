@@ -72,7 +72,7 @@ export class ProductListComponent implements OnInit {
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http
-          .post('/product/add', {record: modalComponent.i})
+          .post('/product/saveOrUpdate', {record: modalComponent.i})
           .subscribe(() => {
             this.getData();
           });
@@ -101,7 +101,7 @@ export class ProductListComponent implements OnInit {
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http
-          .put('/product/update', {id:item.id,record: modalComponent.i})
+          .put('/product/saveOrUpdate', {id:item.id,record: modalComponent.i})
           .subscribe(() => {
             this.getData();
           });
