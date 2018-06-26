@@ -13,6 +13,7 @@ export class ProductListComponent implements OnInit {
   params: any = {
     productName: '',
     categories: [],
+
   };
 
   list: any[] = ['null'];
