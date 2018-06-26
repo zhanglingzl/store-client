@@ -1,7 +1,9 @@
 <nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<sf *ngIf="i" #sf mode="edit" [schema]="schema" [ui]="ui" [formData]="i" button="none">
-  <div class="modal-footer">
-    <button nz-button type="button" (click)="close()">关闭</button>
-    <button nz-button type="submit" [nzType]="'primary'" (click)="save(sf.value)" [disabled]="!sf.valid" [nzLoading]="http.loading">保存</button>
-  </div>
-</sf>
+<nz-card [nzBordered]="false">
+  <nz-steps [(nzCurrent)]="item.step">
+    <nz-step nzTitle="填写商品信息"></nz-step>
+    <nz-step nzTitle="确认转账信息"></nz-step>
+  </nz-steps>
+  <app-step1 *ngIf="item.step==0"></app-step1>
+  <app-step2 *ngIf="item.step==1"></app-step2>
+</nz-card>

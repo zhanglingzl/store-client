@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { _HttpClient } from '@delon/theme';
-import {NzMessageService,NzModalService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {ProductEditComponent} from '../product-edit/product-edit.component';
 
 @Component({
@@ -60,7 +60,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  i = {productName: '', effect: '',ingredient: ''};
+  i = {productName: '', effect: '', ingredient: ''};
   addProduct() {
     this.modalSrv.create({
       nzTitle: '新增商品',
@@ -70,6 +70,7 @@ export class ProductListComponent implements OnInit {
       },
       nzOkText: null,
       nzCancelText: null,
+      nzWidth: 720,
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http

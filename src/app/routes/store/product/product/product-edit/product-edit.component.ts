@@ -2,10 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
   import { _HttpClient } from '@delon/theme';
   import { SFSchema, SFUISchema } from '@delon/form';
+import {TransferService} from './transfer.service';
 
   @Component({
     selector: 'app-product-edit',
     templateUrl: './product-edit.component.html',
+    styleUrls: ['./product-edit.component.less'],
+    providers: [TransferService],
   })
   export class ProductEditComponent implements OnInit {
     record: any = {};
@@ -38,6 +41,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
       private modal: NzModalRef,
       public msgSrv: NzMessageService,
       public http: _HttpClient,
+      public item: TransferService
     ) {}
 
     ngOnInit(): void {
