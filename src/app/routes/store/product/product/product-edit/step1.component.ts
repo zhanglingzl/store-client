@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TransferService } from './transfer.service';
+import {NzMessageService, UploadFile} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-step1',
   templateUrl: './step1.component.html',
+  styles: [`
+    :host ::ng-deep i {
+      font-size: 32px;
+      color: #999;
+    }
+    :host ::ng-deep .ant-upload-text {
+      margin-top: 8px;
+      color: #666;
+    }
+  `]
 })
 export class Step1Component implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, public item: TransferService) {}
+  fileList = [
+    {
+      uid: -1,
+      name: 'xxx.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    }
+  ];
+  previewImage = '';
+  previewVisible = false;
+  constructor(private fb: FormBuilder, public item: TransferService, private msg: NzMessageService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -36,6 +57,10 @@ export class Step1Component implements OnInit {
     this.form.patchValue(this.item);
   }
 
+  handlePreview = (file: UploadFile) => {
+    this.previewImage = file.url || file.thumbUrl;
+    this.previewVisible = true;
+  }
   //#region get form fields
   get pay_account() {
     return this.form.controls['pay_account'];

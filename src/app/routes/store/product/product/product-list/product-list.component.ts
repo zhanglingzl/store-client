@@ -20,6 +20,8 @@ export class ProductListComponent implements OnInit {
 
   loading = true;
 
+  i = {productName: '', effect: '', ingredient: ''};
+
   // region: cateogry
   categories = [
     { id: 0, text: '全部', value: false },
@@ -60,13 +62,13 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  i = {productName: '', effect: '', ingredient: ''};
+
   addProduct() {
     this.modalSrv.create({
       nzTitle: '新增商品',
       nzContent: ProductEditComponent,
       nzComponentParams: {
-        i: {productName: '', effect: '',ingredient: ''}
+        i: {productName: '', effect: '', ingredient: ''}
       },
       nzOkText: null,
       nzCancelText: null,
@@ -90,20 +92,19 @@ export class ProductListComponent implements OnInit {
       });
   }
 
-  updateProduct(item){
-    console.log(item)
+  updateProduct(item) {
     this.modalSrv.create({
       nzTitle: '编辑商品',
       nzContent: ProductEditComponent,
       nzComponentParams: {
-        i: {productName: item.productName, effect: item.effect,ingredient: item.ingredient}
+        i: {productName: item.productName, effect: item.effect, ingredient: item.ingredient}
       },
       nzOkText: null,
       nzCancelText: null,
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http
-          .put('/product/saveOrUpdate', {id:item.id,record: modalComponent.i})
+          .put('/product/saveOrUpdate', {id: item.id, record: modalComponent.i})
           .subscribe(() => {
             this.getData();
           });

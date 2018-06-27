@@ -2,7 +2,7 @@
 <nz-card [nzBordered]="false">
   <nz-steps [(nzCurrent)]="item.step">
     <nz-step nzTitle="填写商品信息"></nz-step>
-    <nz-step nzTitle="确认转账信息"></nz-step>
+    <nz-step nzTitle="代理进货设置"></nz-step>
   </nz-steps>
   <app-step1 *ngIf="item.step==0"></app-step1>
   <app-step2 *ngIf="item.step==1"></app-step2>
