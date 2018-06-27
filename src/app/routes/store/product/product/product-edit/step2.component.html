@@ -1,46 +1,113 @@
 <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()">
-  <nz-form-item>
-    <nz-form-label nzSpan="5">付款账户</nz-form-label>
-    <nz-form-control nzSpan="19">
-      <nz-form-text>{{item.pay_account}}</nz-form-text>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzSpan="5">账户类型</nz-form-label>
-    <nz-form-control nzSpan="19">
-      <nz-form-text>{{item.receiver_type==='alipay' ? '支付宝' : '银行'}}</nz-form-text>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzSpan="5">收款账户</nz-form-label>
-    <nz-form-control nzSpan="19">
-      <nz-form-text>{{item.receiver_account}}</nz-form-text>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzSpan="5">收款人姓名</nz-form-label>
-    <nz-form-control nzSpan="19">
-      <nz-form-text>{{item.receiver_name}}</nz-form-text>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzSpan="5">转账金额</nz-form-label>
-    <nz-form-control nzSpan="19">
-      <nz-form-text>
-        <strong class="text-lg">{{item.amount}}</strong>
-      </nz-form-text>
-    </nz-form-control>
-  </nz-form-item>
+
   <nz-form-item class="border-top-1 mt-lg pt-lg">
-    <nz-form-label nzSpan="5" nzRequired nzFor="password">支付密码</nz-form-label>
-    <nz-form-control nzSpan="19">
-      <input nz-input formControlName="password" type="password" id="password">
-      <ng-container *ngIf="password.dirty || password.touched">
-        <nz-form-explain *ngIf="password.errors?.required">请输入密码</nz-form-explain>
-        <nz-form-explain *ngIf="password.errors?.minlength">至少6位数以上</nz-form-explain>
-      </ng-container>
+    <nz-form-label nzSpan="24">钻石</nz-form-label>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name1">初次进货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input >
+    </nz-form-control>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name2">最小补货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input  id="2">
     </nz-form-control>
   </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name3">购买价</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input id="3">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="border-top-1 mt-lg pt-lg">
+    <nz-form-label nzSpan="24">翡翠</nz-form-label>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name1">初次进货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input >
+    </nz-form-control>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name2">最小补货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input  id="5">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name3">购买价</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input id="6">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="border-top-1 mt-lg pt-lg">
+    <nz-form-label nzSpan="24">红宝石</nz-form-label>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name1">初次进货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input >
+    </nz-form-control>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name2">最小补货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input  id="8">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name3">购买价</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input id="9">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="border-top-1 mt-lg pt-lg">
+    <nz-form-label nzSpan="24">白金</nz-form-label>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name1">初次进货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input >
+    </nz-form-control>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name2">最小补货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input  id="11">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name3">购买价</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input id="12">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="border-top-1 mt-lg pt-lg">
+    <nz-form-label nzSpan="24">黄金</nz-form-label>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name1">初次进货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input >
+    </nz-form-control>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name2">最小补货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input  id="14">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name3">购买价</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input id="15">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="border-top-1 mt-lg pt-lg">
+    <nz-form-label nzSpan="24">白银</nz-form-label>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name1">初次进货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input >
+    </nz-form-control>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name2">最小补货值</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input  id="17">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name3">购买价</nz-form-label>
+    <nz-form-control nzSpan="7">
+      <input nz-input id="18">
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item>
     <nz-form-control [nzSpan]="19" [nzOffset]="5">
       <button nz-button [nzType]="'primary'" [nzLoading]="loading" [disabled]="form.invalid">提交</button>
