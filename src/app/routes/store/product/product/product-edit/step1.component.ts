@@ -34,17 +34,21 @@ export class Step1Component implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      pay_account: [
-        null,
-        Validators.compose([Validators.required, Validators.email]),
-      ],
-      receiver_type: [null, [Validators.required]],
-      receiver_account: [null, [Validators.required]],
-      receiver_name: [
+      productName: [
         null,
         Validators.compose([Validators.required, Validators.minLength(2)]),
       ],
-      amount: [
+      specification: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      effect: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(2)]),
+      ],
+      ingredient: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(2)]),
+      ],
+      productPrice: [
         null,
         Validators.compose([
           Validators.required,

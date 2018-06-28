@@ -2,14 +2,14 @@
   <div class="clearfix">
 
     <nz-form-item>
-      <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name">商品名称</nz-form-label>
+      <nz-form-label nzSpan="5" nzRequired nzFor="productName">商品名称</nz-form-label>
       <nz-form-control nzSpan="19">
-        <input nz-input formControlName="receiver_name" id="receiver_name">
+        <input nz-input formControlName="productName" id="productName">
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name">商品图片</nz-form-label>
+      <nz-form-label nzSpan="5" nzRequired nzFor="productImage">商品图片</nz-form-label>
       <nz-form-control nzSpan="19">
         <nz-upload
           nzAction="https://jsonplaceholder.typicode.com/posts/"
@@ -32,34 +32,36 @@
     <nz-form-item>
       <nz-form-label nzSpan="5" nzRequired>售卖规格</nz-form-label>
       <nz-form-control [nzSpan]="7">
-        <nz-select formControlName="pay_account">
-          <nz-option [nzLabel]="item.pay_account" [nzValue]="item.pay_account"></nz-option>
+        <nz-select formControlName="specification">
+          <nz-option [nzLabel]="'件'" [nzValue]="'0'"></nz-option>
+          <nz-option [nzLabel]="'个'" [nzValue]="'1'"></nz-option>
+          <nz-option [nzLabel]="'箱'" [nzValue]="'2'"></nz-option>
         </nz-select>
       </nz-form-control>
       <nz-form-label nzSpan="5" nzRequired>商品价格</nz-form-label>
       <nz-form-control [nzSpan]="7">
-        <input nz-input formControlName="receiver_name" id="receiver_name1">
+        <input nz-input formControlName="productPrice" id="productPrice">
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name">产品信息</nz-form-label>
+      <nz-form-label nzSpan="5" nzRequired nzFor="description">产品信息</nz-form-label>
       <nz-form-control nzSpan="19">
-        <textarea nz-input [nzAutosize]="{ minRows: 1, maxRows: 6 }"></textarea>
+        <textarea nz-input formControlName="description" [nzAutosize]="{ minRows: 1, maxRows: 6 }"></textarea>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name">商品作用</nz-form-label>
+      <nz-form-label nzSpan="5" nzRequired nzFor="effect">商品作用</nz-form-label>
       <nz-form-control nzSpan="19">
-        <textarea nz-input [nzAutosize]="{ minRows: 1, maxRows: 6 }"></textarea>
+        <textarea nz-input formControlName="effect" [nzAutosize]="{ minRows: 1, maxRows: 6 }"></textarea>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label nzSpan="5" nzRequired nzFor="receiver_name">商品成分</nz-form-label>
+      <nz-form-label nzSpan="5" nzRequired nzFor="ingredient">商品成分</nz-form-label>
       <nz-form-control nzSpan="19">
-        <textarea nz-input [nzAutosize]="{ minRows: 1, maxRows: 6 }"></textarea>
+        <textarea nz-input formControlName="ingredient" [nzAutosize]="{ minRows: 1, maxRows: 6 }"></textarea>
       </nz-form-control>
     </nz-form-item>
 

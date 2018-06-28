@@ -5,49 +5,58 @@ export class TransferService {
   step: 0 | 1 | 2 = 1;
 
   /**
-   * 付款账户
+   * 商品名称
    */
-  pay_account: string;
+  productName: string;
 
   /**
-   * 收款账户类型
+   * 商品价格
    */
-  receiver_type: 'alipay' | 'bank';
-
-  get receiver_type_str() {
-    return this.receiver_type === 'alipay' ? '支付宝' : '银行';
-  }
+  productPrice: number;
 
   /**
-   * 收款账户
+   * 商品作用
    */
-  receiver_account: string;
+  effect: string;
 
   /**
-   * 收款姓名
+   * 商品成分
    */
-  receiver_name: string;
+  ingredient: string;
 
   /**
-   * 金额
+   * 商品信息
    */
-  amount: number;
+  description: string;
 
   /**
-   * 支付密码
+   * 质检报告
    */
-  password = '123456';
+  qualityReport: string;
+
+  /**
+   * 商品规格
+   */
+  specification: '0' | '1' | '2';
+
+  agencyLevelProducts: AgencyLevelProduct[];
 
   again() {
     this.step = 0;
-    this.pay_account = 'ant-design@alipay.com';
-    this.receiver_type = 'alipay';
-    this.receiver_account = 'test@example.com';
-    this.receiver_name = 'asdf';
-    this.amount = 500;
+    this.specification = '0';
   }
 
   constructor() {
     this.again();
   }
+}
+
+export class AgencyLevelProduct {
+
+  level: number;
+
+  firstStockCount: number;
+
+  replenishMinCount: number;
+
 }
