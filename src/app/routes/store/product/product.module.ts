@@ -6,21 +6,23 @@ import {SharedModule} from '../../../shared/shared.module';
 import { AgencyComponent } from './agency/agency.component';
 import { AgencyListComponent } from './agency/agency-list/agency-list.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
-import {Step1Component} from './product/product-edit/step1.component';
-import {Step2Component} from './product/product-edit/step2.component';
-
-const COMPONENTS_NOROUNT = [Step1Component, Step2Component];
+import {AgencyLevelPipe} from './product/pipe/agencyLevelPipe';
 
 @NgModule({
   imports: [
     SharedModule,
     ProductRoutingModule
   ],
-  declarations: [ProductComponent, ProductListComponent, AgencyComponent, AgencyComponent, AgencyListComponent, ProductEditComponent, ...COMPONENTS_NOROUNT],
+  declarations: [ProductComponent,
+    ProductListComponent,
+    AgencyComponent,
+    AgencyComponent,
+    AgencyListComponent,
+    ProductEditComponent,
+    AgencyLevelPipe],
   //没有在路由中注册的component
   entryComponents: [
     ProductEditComponent,
-    COMPONENTS_NOROUNT
   ]
 })
 export class ProductModule { }

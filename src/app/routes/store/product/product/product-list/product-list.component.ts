@@ -2,11 +2,13 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {ProductEditComponent} from '../product-edit/product-edit.component';
+import {TransferService} from '../transfer.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product.component.less'],
+  providers: [TransferService]
 })
 export class ProductListComponent implements OnInit {
 
@@ -47,7 +49,10 @@ export class ProductListComponent implements OnInit {
     this.getData();
   }
   // endregion
-  constructor(private http: _HttpClient, public msg: NzMessageService, public modalSrv: NzModalService) {}
+  constructor(private http: _HttpClient,
+              public msg: NzMessageService,
+              public modalSrv: NzModalService,
+              public item: TransferService) {}
 
   ngOnInit() {
     this.getData();
@@ -75,8 +80,9 @@ export class ProductListComponent implements OnInit {
       nzWidth: 720,
       nzOnOk: (modalComponent) => {
         this.loading = true;
+        console.log(modalComponent.item)
         this.http
-          .post('/product/saveOrUpdate', {record: modalComponent.i})
+          .post('/product/saveOrUpdate', modalComponent.item)
           .subscribe(() => {
             this.getData();
           });
@@ -97,14 +103,15 @@ export class ProductListComponent implements OnInit {
       nzTitle: '编辑商品',
       nzContent: ProductEditComponent,
       nzComponentParams: {
-        i: {productName: item.productName, effect: item.effect, ingredient: item.ingredient}
+        i: item
       },
       nzOkText: null,
       nzCancelText: null,
+      nzWidth: 720,
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http
-          .put('/product/saveOrUpdate', {id: item.id, record: modalComponent.i})
+          .put('/product/saveOrUpdate', modalComponent.item)
           .subscribe(() => {
             this.getData();
           });

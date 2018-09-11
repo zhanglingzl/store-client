@@ -39,24 +39,13 @@ export class TransferService {
    */
   specification: '0' | '1' | '2';
 
-  agencyLevelProducts: AgencyLevelProduct[];
+
 
   again() {
-    this.step = 0;
     this.specification = '0';
   }
 
   constructor() {
     this.again();
   }
-}
-
-export class AgencyLevelProduct {
-
-  level: number;
-
-  firstStockCount: number;
-
-  replenishMinCount: number;
-
 }
