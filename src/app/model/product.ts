@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
+export class Product {
 
-// @Injectable()
-export class TransferService {
   id: number;
 
   /**
@@ -49,12 +47,21 @@ export class TransferService {
    */
   cover: string;
 
+  /**
+   * 零售价
+   */
+  amount: number;
 
-  again() {
-    this.specification = '0';
-  }
+  /**
+   * 会员价
+   */
+  vipAmount: number;
 
-  constructor() {
-    this.again();
-  }
+  /**
+   * 产品图片
+   */
+  images: string;
+
+
+
 }

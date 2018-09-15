@@ -59,9 +59,9 @@
         <ng-template #cover>
           <img alt="{{item.productName}}" src="{{item.cover}}">
         </ng-template>
-        <nz-card-meta [nzTitle]="nzTitle" [nzDescription]="item.effect">
+        <nz-card-meta [nzTitle]="nzTitle">
           <ng-template #nzTitle>
-            <a (click)="msg.success('标题：' + item.id);">{{item.productName}}</a>
+            <a (click)="msg.success('商品编号：' + item.productNo);">{{item.productName}}</a>
           </ng-template>
         </nz-card-meta>
         <div class="card-item-content">

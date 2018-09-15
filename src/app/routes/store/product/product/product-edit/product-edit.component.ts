@@ -4,17 +4,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   import { SFSchema, SFUISchema } from '@delon/form';
 import {TransferService} from '../transfer.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Product} from '../../../../../model/product';
 
   @Component({
     selector: 'app-product-edit',
     templateUrl: './product-edit.component.html',
-    styleUrls: ['./product-edit.component.less'],
-    providers: [TransferService]
+    styleUrls: ['./product-edit.component.less']
   })
   export class ProductEditComponent implements OnInit {
 
     form: FormGroup;
-
+    product: Product;
     fileList = [
       {
         uid: -1,
@@ -31,17 +31,20 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
       public msgSrv: NzMessageService,
       public http: _HttpClient,
       private fb: FormBuilder,
-      public item: TransferService
     ) {}
 
 
     ngOnInit() {
       this.form = this.fb.group({
+        productNo: [
+          null,
+          Validators.compose([Validators.required, Validators.minLength(2)]),
+        ],
         productName: [
           null,
           Validators.compose([Validators.required, Validators.minLength(2)]),
         ],
-        specification: [null, [Validators.required]],
+        // specification: [null, [Validators.required]],
         description: [null, [Validators.required]],
         effect: [
           null,
@@ -61,7 +64,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
           ]),
         ],
       });
-      this.form.patchValue(this.item);
+      this.form.patchValue(this.product);
     }
 
     handlePreview = (file: UploadFile) => {
@@ -71,11 +74,33 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
     save() {
       // this.msgSrv.success('保存成功');
-      this.item = this.form.value;
+      this.product = Object.assign(this.product==null? new Product(): this.product, this.form.value);
       this.modal.triggerOk();
     }
 
     close() {
+      alert(this.form.valid);
       this.modal.destroy();
     }
+
+
+    get productNo() {
+      return this.form.controls['productNo'];
+    }
+    get productName() {
+      return this.form.controls['productName'];
+    }
+    get productPrice() {
+      return this.form.controls['productPrice'];
+    }
+    get description() {
+      return this.form.controls['description'];
+    }
+    get effect() {
+      return this.form.controls['effect'];
+    }
+    get ingredient() {
+      return this.form.controls['ingredient'];
+    }
+
   }
