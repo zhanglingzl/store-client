@@ -24,24 +24,51 @@
                 <nz-option [nzLabel]="'箱'" [nzValue]="'2'"></nz-option>
               </nz-select>
             </nz-form-control>-->
-      <nz-form-label nzSpan="5" nzRequired>商品价格</nz-form-label>
+      <nz-form-label nzSpan="5" nzRequired>零售价</nz-form-label>
       <nz-form-control [nzSpan]="7">
-        <input nz-input formControlName="productPrice" id="productPrice">
+        <input nz-input formControlName="amount" id="amount">
+      </nz-form-control>
+      <nz-form-label nzSpan="5" nzRequired>会员价</nz-form-label>
+      <nz-form-control [nzSpan]="7">
+        <input nz-input formControlName="vipAmount" id="vipAmount">
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzSpan="5" nzRequired nzFor="productCover">商品封面</nz-form-label>
+      <nz-form-control nzSpan="7">
+        <nz-upload
+
+          nzListType="text"
+          [nzMultiple] = true
+          [(nzFileList)]="coverList"
+          [nzShowButton]="coverList.length < 1"
+          [nzBeforeUpload]="beforeUploadCover">
+          <!--<i class="anticon anticon-plus"></i>-->
+          <!--<div class="ant-upload-text">点击上传</div>-->
+          <button class="ant-upload-text" nz-button nzType="default">选择封面</button>
+        </nz-upload>
+        <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+          <ng-template #modalContent>
+            <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+          </ng-template>
+        </nz-modal>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
       <nz-form-label nzSpan="5" nzRequired nzFor="productImage">商品图片</nz-form-label>
-      <nz-form-control nzSpan="19">
+      <nz-form-control nzSpan="7">
         <nz-upload
-          nzAction="https://jsonplaceholder.typicode.com/posts/"
-          nzListType="picture-card"
+
+          nzListType="text"
           [nzMultiple] = true
           [(nzFileList)]="fileList"
           [nzShowButton]="fileList.length < 6"
-          [nzPreview]="handlePreview">
-          <i class="anticon anticon-plus"></i>
-          <!--<div class="ant-upload-text">图片上传</div>-->
+          [nzBeforeUpload]="beforeUpload">
+          <!--<i class="anticon anticon-plus"></i>-->
+          <!--<div class="ant-upload-text">点击上传</div>-->
+          <button nz-button nzType="default">选择图片</button>
         </nz-upload>
         <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
           <ng-template #modalContent>

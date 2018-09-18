@@ -13,11 +13,6 @@ export class Product {
   productNo: string;
 
   /**
-   * 商品价格
-   */
-  productPrice: number;
-
-  /**
    * 商品作用
    */
   effect: string;
@@ -36,11 +31,6 @@ export class Product {
    * 质检报告
    */
   qualityReport: string;
-
-  /**
-   * 商品规格
-   */
-  specification: '0' | '1' | '2';
 
   /**
    * 产品封面

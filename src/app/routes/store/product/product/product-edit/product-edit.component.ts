@@ -12,23 +12,18 @@ import {Product} from '../../../../../model/product';
     styleUrls: ['./product-edit.component.less']
   })
   export class ProductEditComponent implements OnInit {
-
+    // nzAction="https://jsonplaceholder.typicode.com/posts/"
     form: FormGroup;
     product: Product;
-    fileList = [
-      {
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      }
-    ];
+    fileList: File[] = [];
+    coverList: File[] = [];
     previewImage = '';
     previewVisible = false;
+    formData: FormData = new FormData();
 
     constructor(
       private modal: NzModalRef,
-      public msgSrv: NzMessageService,
+      public msg: NzMessageService,
       public http: _HttpClient,
       private fb: FormBuilder,
     ) {}
@@ -54,7 +49,16 @@ import {Product} from '../../../../../model/product';
           null,
           Validators.compose([Validators.required, Validators.minLength(2)]),
         ],
-        productPrice: [
+        amount: [
+          null,
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(`(^[1-9]([0-9]+)?(\\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\\.[0-9]([0-9])?$)`),
+            Validators.min(1),
+            Validators.max(10000 * 100),
+          ]),
+        ],
+        vipAmount: [
           null,
           Validators.compose([
             Validators.required,
@@ -68,18 +72,53 @@ import {Product} from '../../../../../model/product';
     }
 
     handlePreview = (file: UploadFile) => {
+      /*let reader = new FileReader();
+      reader.readAsDataURL(file);*/
       this.previewImage = file.url || file.thumbUrl;
       this.previewVisible = true;
     };
 
+    beforeUpload = (file: File) => {
+      const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isImage) {
+        this.msg.error('请选择图片!');
+      }else {
+        this.fileList.push(file);
+      }
+      /*const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.msg.error('Image must smaller than 2MB!');
+      }*/
+      return false;
+    };
+
+    beforeUploadCover = (file: File) => {
+      const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isImage) {
+        this.msg.error('请选择图片!');
+      }else {
+        this.coverList.push(file);
+      }
+      return false;
+    };
+
+    getFormDate(){
+      this.fileList.forEach((file: any) => {
+        this.formData.append('imageList', file);
+      });
+      this.coverList.forEach((file: any) => {
+        this.formData.append('coverList', file);
+      });
+    }
+
     save() {
-      // this.msgSrv.success('保存成功');
+      // this.msg.success('保存成功');
+      this.getFormDate();
       this.product = Object.assign(this.product==null? new Product(): this.product, this.form.value);
       this.modal.triggerOk();
     }
 
     close() {
-      alert(this.form.valid);
       this.modal.destroy();
     }
 
@@ -90,8 +129,11 @@ import {Product} from '../../../../../model/product';
     get productName() {
       return this.form.controls['productName'];
     }
-    get productPrice() {
-      return this.form.controls['productPrice'];
+    get amount() {
+      return this.form.controls['amount'];
+    }
+    get vipAmount() {
+      return this.form.controls['vipAmount'];
     }
     get description() {
       return this.form.controls['description'];
