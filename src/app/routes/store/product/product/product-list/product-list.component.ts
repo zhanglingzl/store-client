@@ -2,15 +2,12 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {ProductEditComponent} from '../product-edit/product-edit.component';
-import {TransferService} from '../transfer.service';
-import {Product} from '../../../../../model/product';
-import {JsonUtils} from '../JsonUtils';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product.component.less'],
-  providers: [JsonUtils]
+  providers: []
 })
 export class ProductListComponent implements OnInit {
 
@@ -58,7 +55,7 @@ export class ProductListComponent implements OnInit {
         this.http
           .post('/product/saveOrUpdate', modalComponent.formData, modalComponent.product)
           .subscribe(() => {
-            this.msg.success("保存成功");
+            this.msg.success('保存成功');
             this.getData();
           });
 
