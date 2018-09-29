@@ -53,7 +53,7 @@ export class ProductListComponent implements OnInit {
       nzOnOk: (modalComponent) => {
         this.loading = true;
         this.http
-          .post('/product/saveOrUpdate', modalComponent.formData, modalComponent.product)
+          .post('/product/saveOrUpdate', modalComponent.product)
           .subscribe(() => {
             this.msg.success('保存成功');
             this.getData();

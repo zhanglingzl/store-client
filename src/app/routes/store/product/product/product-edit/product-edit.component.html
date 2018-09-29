@@ -36,17 +36,15 @@
 
     <nz-form-item>
       <nz-form-label nzSpan="5" nzRequired nzFor="productCover">商品封面</nz-form-label>
-      <nz-form-control nzSpan="7">
+      <nz-form-control nzSpan="19">
         <nz-upload
-
-          nzListType="text"
-          [nzMultiple] = true
+          nzListType="picture-card"
           [(nzFileList)]="coverList"
           [nzShowButton]="coverList.length < 1"
-          [nzBeforeUpload]="beforeUploadCover">
-          <!--<i class="anticon anticon-plus"></i>-->
-          <!--<div class="ant-upload-text">点击上传</div>-->
-          <button class="ant-upload-text" nz-button nzType="default">选择封面</button>
+          [nzBeforeUpload]="beforeUpload"
+          [nzCustomRequest]="customReq"
+          [nzPreview]="handlePreview">
+          <i class="anticon anticon-plus"></i>
         </nz-upload>
         <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
           <ng-template #modalContent>
@@ -58,17 +56,15 @@
 
     <nz-form-item>
       <nz-form-label nzSpan="5" nzRequired nzFor="productImage">商品图片</nz-form-label>
-      <nz-form-control nzSpan="7">
+      <nz-form-control nzSpan="19">
         <nz-upload
-
-          nzListType="text"
-          [nzMultiple] = true
+          nzListType="picture-card"
           [(nzFileList)]="fileList"
           [nzShowButton]="fileList.length < 6"
-          [nzBeforeUpload]="beforeUpload">
-          <!--<i class="anticon anticon-plus"></i>-->
-          <!--<div class="ant-upload-text">点击上传</div>-->
-          <button nz-button nzType="default">选择图片</button>
+          [nzBeforeUpload]="beforeUpload"
+          [nzCustomRequest]="customReq"
+          [nzPreview]="handlePreview">
+          <i class="anticon anticon-plus"></i>
         </nz-upload>
         <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
           <ng-template #modalContent>

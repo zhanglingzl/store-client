@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-  import {NzModalRef, NzMessageService, UploadFile} from 'ng-zorro-antd';
-  import { _HttpClient } from '@delon/theme';
-  import { SFSchema, SFUISchema } from '@delon/form';
-import {TransferService} from '../transfer.service';
+import {NzModalRef, NzMessageService, UploadFile, UploadXHRArgs} from 'ng-zorro-antd';
+import { _HttpClient } from '@delon/theme';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../../../model/product';
+import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 
   @Component({
     selector: 'app-product-edit',
@@ -12,14 +11,12 @@ import {Product} from '../../../../../model/product';
     styleUrls: ['./product-edit.component.less']
   })
   export class ProductEditComponent implements OnInit {
-    // nzAction="https://jsonplaceholder.typicode.com/posts/"
     form: FormGroup;
     product: Product;
-    fileList: File[] = [];
-    coverList: File[] = [];
+    fileList: UploadFile[] = [];
+    coverList: UploadFile[] = [];
     previewImage = '';
     previewVisible = false;
-    formData: FormData = new FormData();
 
     constructor(
       private modal: NzModalRef,
@@ -72,49 +69,42 @@ import {Product} from '../../../../../model/product';
     }
 
     handlePreview = (file: UploadFile) => {
-      /*let reader = new FileReader();
-      reader.readAsDataURL(file);*/
       this.previewImage = file.url || file.thumbUrl;
       this.previewVisible = true;
-    };
+    }
+
+    customReq = (item: UploadXHRArgs) => {
+      // 构建一个 FormData 对象，用于存储文件或其他参数
+      const formData = new FormData();
+      // tslint:disable-next-line:no-any
+      formData.append('file', item.file as any);
+      formData.append('uid', item.file.uid);
+      // 始终返回一个 `Subscription` 对象，nz-upload 会在适当时机自动取消订阅
+      return this.http.post('/product/fileUpload', formData, {
+        reportProgress : true,
+        withCredentials: true
+      }).subscribe((event: HttpEvent<{}>) => {
+        item.onSuccess(null, item.file, event);
+      }, (err) => {
+        // 处理失败
+        item.onError(err, item.file);
+      });
+    }
 
     beforeUpload = (file: File) => {
       const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isImage) {
         this.msg.error('请选择图片!');
-      }else {
-        this.fileList.push(file);
       }
       /*const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {
         this.msg.error('Image must smaller than 2MB!');
       }*/
-      return false;
-    };
-
-    beforeUploadCover = (file: File) => {
-      const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
-      if (!isImage) {
-        this.msg.error('请选择图片!');
-      }else {
-        this.coverList.push(file);
-      }
-      return false;
-    };
-
-    getFormDate(){
-      this.fileList.forEach((file: any) => {
-        this.formData.append('imageList', file);
-      });
-      this.coverList.forEach((file: any) => {
-        this.formData.append('coverList', file);
-      });
+      return isImage;
     }
 
     save() {
-      // this.msg.success('保存成功');
-      this.getFormDate();
-      this.product = Object.assign(this.product==null? new Product(): this.product, this.form.value);
+      this.product = Object.assign(this.product == null ? new Product() : this.product, this.form.value);
       this.modal.triggerOk();
     }
 
@@ -122,6 +112,10 @@ import {Product} from '../../../../../model/product';
       this.modal.destroy();
     }
 
+    setProductCoverAndImages() {
+      this.product.cover = this.coverList.map(cover => cover.uid).toString();
+      this.product.images = this.fileList.map(image => image.uid).toString();
+    }
 
     get productNo() {
       return this.form.controls['productNo'];
