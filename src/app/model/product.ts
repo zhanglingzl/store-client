@@ -52,6 +52,11 @@ export class Product {
    */
   images: string;
 
+  /**
+   * 图片访问url
+   */
+  imageUrl: string;
+
 
 
 }

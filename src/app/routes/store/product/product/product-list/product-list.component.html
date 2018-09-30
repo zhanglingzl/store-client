@@ -57,7 +57,7 @@
           </nz-tooltip>
         </ng-template>
         <ng-template #cover>
-          <img alt="{{item.productName}}" src="{{item.cover}}">
+          <img alt="{{item.productName}}" src="{{item.imageUrl + item.productNo + '/' +item.cover}}">
         </ng-template>
         <nz-card-meta [nzTitle]="nzTitle">
           <ng-template #nzTitle>

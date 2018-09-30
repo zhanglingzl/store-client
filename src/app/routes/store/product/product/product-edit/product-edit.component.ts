@@ -4,6 +4,7 @@ import { _HttpClient } from '@delon/theme';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../../../model/product';
 import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
+import {Image} from '../../../../../model/image';
 
   @Component({
     selector: 'app-product-edit',
@@ -11,10 +12,14 @@ import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
     styleUrls: ['./product-edit.component.less']
   })
   export class ProductEditComponent implements OnInit {
+    DEF_SEP = ',';
+    FILE_SEP = '/';
+    POINT_SEP = '.';
+    UID_STATUS = '$$';
     form: FormGroup;
     product: Product;
-    fileList: UploadFile[] = [];
-    coverList: UploadFile[] = [];
+    fileList = [];
+    coverList = [];
     previewImage = '';
     previewVisible = false;
 
@@ -66,6 +71,9 @@ import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
         ],
       });
       this.form.patchValue(this.product);
+      this.setImageListByProduct();
+      this.setCoverByProduct();
+      console.log(this.fileList, 22);
     }
 
     handlePreview = (file: UploadFile) => {
@@ -85,6 +93,7 @@ import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
         withCredentials: true
       }).subscribe((event: HttpEvent<{}>) => {
         item.onSuccess(null, item.file, event);
+        console.log(this.fileList);
       }, (err) => {
         // 处理失败
         item.onError(err, item.file);
@@ -105,6 +114,7 @@ import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 
     save() {
       this.product = Object.assign(this.product == null ? new Product() : this.product, this.form.value);
+      this.setProductCoverAndImages();
       this.modal.triggerOk();
     }
 
@@ -112,11 +122,33 @@ import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
       this.modal.destroy();
     }
 
+    /**
+     * 将文件列表转化为逗号分隔的字符串并给product赋值
+     */
     setProductCoverAndImages() {
-      this.product.cover = this.coverList.map(cover => cover.uid).toString();
-      this.product.images = this.fileList.map(image => image.uid).toString();
+      this.product.cover = this.coverList.map(cover => cover.uid + cover.name.substring(cover.name.lastIndexOf('.'))).toString();
+      this.product.images = this.fileList.map(image => image.uid + image.name.substring(image.name.lastIndexOf('.'))).toString();
     }
 
+    setImageListByProduct() {
+      this.product.images.split(this.DEF_SEP).forEach(image => {
+        const file = new Image();
+        file.name = image;
+        file.url = this.product.imageUrl + this.product.productNo + this.FILE_SEP + image;
+        file.uid = image.substring(0, image.lastIndexOf(this.POINT_SEP)) + this.UID_STATUS;
+        file.size = 0;
+        this.fileList.push(file);
+      });
+    }
+
+    setCoverByProduct() {
+      const file = new Image();
+      file.name = this.product.cover;
+      file.url = this.product.imageUrl + this.product.productNo + this.FILE_SEP + this.product.cover;
+      file.uid = this.product.cover.substring(0, this.product.cover.lastIndexOf(this.POINT_SEP)) + this.UID_STATUS;
+      file.size = 0;
+      this.coverList.push(file);
+    }
     get productNo() {
       return this.form.controls['productNo'];
     }
