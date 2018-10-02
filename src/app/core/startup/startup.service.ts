@@ -25,7 +25,8 @@ export class StartupService {
 
   private viaHttp(resolve: any, reject: any) {
     zip(
-      // this.httpClient.get('http://store.vicp.la:8888/assets/tmp/app-data.json')
+      // this.httpClient.get('http://localhost:8080/menu')
+      // this.httpClient.get('http://store.greenleague.xin/menu')
       this.httpClient.get('http://localhost:4200/assets/tmp/app-data.json')
     ).pipe(
       // 接收其他拦截器后产生的异常消息
@@ -35,11 +36,11 @@ export class StartupService {
       })
     ).subscribe(([appData]) => {
         const tokenData = this.tokenService.get<JWTTokenModel >(JWTTokenModel) ;
-        // if (!tokenData.token) {
-        //   this.injector.get(Router).navigateByUrl('/passport/login');
-        //   resolve({});
-        //   return;
-        // }
+        if (!tokenData.token) {
+          this.injector.get(Router).navigateByUrl('/passport/login');
+          resolve({});
+          return;
+        }
       // application data
       const res: any = appData;
       // 应用信息：包括站点名、描述、年份
@@ -53,7 +54,7 @@ export class StartupService {
       // 设置页面标题的后缀
       this.titleService.suffix = res.app.name;
     },
-    () => { },
+    () => {},
     () => {
       resolve(null);
     });

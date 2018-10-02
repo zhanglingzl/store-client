@@ -15,7 +15,7 @@ import { UserLockComponent } from './passport/lock/lock.component';
 // passport pages
 import { UserLoginComponent } from './passport/login/login.component';
 import { UserRegisterResultComponent } from './passport/register-result/register-result.component';
-import { UserRegisterComponent } from './passport/register/register.component'
+import { UserRegisterComponent } from './passport/register/register.component';
 
 const routes: Routes = [
   {
@@ -26,11 +26,10 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, data: { title: '主页' } },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
-      { path: 'admin', loadChildren: './store/admin/admin.module#AdminModule'},
+      // { path: 'admin', loadChildren: './store/admin/admin.module#AdminModule'},
       { path: 'agency', loadChildren: './store/agency/agency.module#AgencyModule'},
-      { path: 'guest', loadChildren: './store/guest/guest.module#GuestModule'},
-      { path: 'product', loadChildren: './store/product/product.module#ProductModule'},
-      { path: 'train', loadChildren: './store/train/train.module#TrainModule'}
+      // { path: 'guest', loadChildren: './store/guest/guest.module#GuestModule'},
+      { path: 'product', loadChildren: './store/product/product.module#ProductModule'}
     ]
   },
   // 全屏布局
@@ -38,7 +37,7 @@ const routes: Routes = [
       path: 'wechat',
       component: LayoutFullScreenComponent,
       children: [
-        {path:'', loadChildren: './wechat/wechat.module#WechatModule'}
+        {path: '', loadChildren: './wechat/wechat.module#WechatModule'}
       ]
   },
   // passport

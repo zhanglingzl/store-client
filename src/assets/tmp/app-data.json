@@ -19,24 +19,6 @@
         "icon": "icon-speedometer"
       },
       {
-        "text": "后台管理",
-        "icon": "icon-people",
-        "children": [
-          {
-            "text": "用户管理",
-            "link": "/admin/user"
-          },
-          {
-            "text": "模块管理",
-            "link": "/admin/module"
-          },
-          {
-            "text": "角色管理",
-            "link": "/admin/role"
-          }
-        ]
-      },
-      {
         "text": "代理管理",
         "icon": "icon-diamond",
         "children": [
@@ -45,22 +27,22 @@
             "link": "/agency/job"
           },
           {
-            "text": "准代理",
-            "link": "/agency/quasi"
-          },
-          {
             "text": "代理升级",
             "link": "/agency/upgrade"
           }
         ]
       },
       {
-        "text": "散户管理",
+        "text": "订单管理",
         "icon": "icon-user",
         "children": [
           {
-            "text": "散户总览",
-            "link": "/guest"
+            "text": "订单查询",
+            "link": "/order"
+          },
+          {
+            "text": "物流管理",
+            "link": "/order"
           }
         ]
       },
@@ -75,20 +57,6 @@
           {
             "text": "代理进货",
             "link": "/product/agency"
-          }
-        ]
-      },
-      {
-        "text": "培训资料",
-        "icon": "icon-book-open",
-        "children": [
-          {
-            "text": "文字培训",
-            "link": "/train/text"
-          },
-          {
-            "text": "视频培训",
-            "link": "/train/video"
           }
         ]
       }
