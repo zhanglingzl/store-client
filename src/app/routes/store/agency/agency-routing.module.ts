@@ -9,11 +9,11 @@ import {JobListComponent} from './job/job-list/job-list.component';
 
 const routes: Routes = [
   { path: 'job', component: JobComponent, children: [
-      { path: '', component:JobListComponent },
+      { path: '', component: JobListComponent },
       // { path: ':id', component: UserViewComponent, data: { title: '在职代理'} }
     ] },
   { path: 'upgrade', component: UpgradeComponent, children: [
-      { path: '', component:UpgradeListComponent },
+      { path: '', component: UpgradeListComponent },
       // { path: ':id', component: UserViewComponent, data: { title: '在职代理'} }
     ] },
   { path: 'quasi', component: QuasiComponent, children: [
