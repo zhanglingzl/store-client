@@ -27,7 +27,7 @@ export class StartupService {
     zip(
       // this.httpClient.get('http://localhost:8080/menu')
       // this.httpClient.get('http://store.greenleague.xin/menu')
-      this.httpClient.get('http://localhost:4200/assets/tmp/app-data.json')
+      this.httpClient.get('http://localhost:4100/assets/tmp/app-data.json')
     ).pipe(
       // 接收其他拦截器后产生的异常消息
       catchError(([appData]) => {

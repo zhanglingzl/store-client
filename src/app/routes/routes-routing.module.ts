@@ -29,7 +29,8 @@ const routes: Routes = [
       // { path: 'admin', loadChildren: './store/admin/admin.module#AdminModule'},
       { path: 'agency', loadChildren: './store/agency/agency.module#AgencyModule'},
       // { path: 'guest', loadChildren: './store/guest/guest.module#GuestModule'},
-      { path: 'product', loadChildren: './store/product/product.module#ProductModule'}
+      { path: 'product', loadChildren: './store/product/product.module#ProductModule'},
+      { path: 'trade', loadChildren: './store/trade/trade.module#TradeModule'}
     ]
   },
   // 全屏布局
@@ -37,7 +38,6 @@ const routes: Routes = [
       path: 'wechat',
       component: LayoutFullScreenComponent,
       children: [
-        {path: '', loadChildren: './wechat/wechat.module#WechatModule'}
       ]
   },
   // passport

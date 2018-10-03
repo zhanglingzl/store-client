@@ -38,7 +38,7 @@
         "children": [
           {
             "text": "订单查询",
-            "link": "/order"
+            "link": "/trade/list"
           },
           {
             "text": "物流管理",
