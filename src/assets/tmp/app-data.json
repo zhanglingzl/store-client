@@ -25,10 +25,6 @@
           {
             "text": "在职代理",
             "link": "/agency/job"
-          },
-          {
-            "text": "代理升级",
-            "link": "/agency/upgrade"
           }
         ]
       },
@@ -53,10 +49,6 @@
           {
             "text": "商品展示",
             "link": "/product"
-          },
-          {
-            "text": "代理进货",
-            "link": "/product/agency"
           }
         ]
       }

@@ -30,11 +30,11 @@
       <th >姓名</th>
       <th >性别</th>
       <th >等级</th>
-      <th >类型</th>
       <th >手机号</th>
       <th >微信号</th>
+      <th >微信名</th>
       <th>地址</th>
-      <th></th>
+      <th>操作</th>
     </tr>
     </thead>
     <tbody>
@@ -44,16 +44,31 @@
           <td [nzIndentSize]="item.level1*20" [nzShowExpand]="!!item.children && item.children.length >0" [(nzExpand)]="item.expand" (nzExpandChange)="collapse(expandDataCache[data.id],item,$event)">
             {{item.name}}
           </td>
-          <td>{{item.gender}}</td>
-          <td>{{item.type}}</td>
-          <td>{{item.level}}</td>
+          <td>{{item.gender | genderPipe}}</td>
+          <td>{{item.level | levelPipe}}</td>
           <td>{{item.telephone}}</td>
-          <td>{{item.weChatId}}</td>
+          <td>{{item.wechat}}</td>
+          <td>{{item.likeName}}</td>
           <td>{{item.address}}</td>
-          <td><a href="#">在售商品</a></td>
+          <td (click)="updrade(item)"><a>{{item.parent != null? '代理升级' : null}}</a></td>
         </tr>
       </ng-template>
     </ng-template>
     </tbody>
   </nz-table>
 </nz-card>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="代理升级" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+  <nz-form-label nzSpan="5" nzRequired>代理等级</nz-form-label>
+  <nz-form-control [nzSpan]="19">
+    <nz-select style="width: 100%;" [(ngModel)]="updateLevel">
+      <nz-option [nzLabel]="'普通会员'" [nzValue]="0"></nz-option>
+      <nz-option [nzLabel]="'琥珀'" [nzValue]="1"></nz-option>
+      <nz-option [nzLabel]="'蜜蜡'" [nzValue]="2"></nz-option>
+      <nz-option [nzLabel]="'欧珀'" [nzValue]="3"></nz-option>
+      <nz-option [nzLabel]="'红宝石'" [nzValue]="4"></nz-option>
+      <nz-option [nzLabel]="'翡翠'" [nzValue]="5"></nz-option>
+      <nz-option [nzLabel]="'钻石'" [nzValue]="6"></nz-option>
+    </nz-select>
+  </nz-form-control>
+</nz-modal>

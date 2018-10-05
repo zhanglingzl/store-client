@@ -10,6 +10,12 @@ import { UpgradeListComponent } from './upgrade/upgrade-list/upgrade-list.compon
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {InServerComponent} from './in-server/in-server.component';
 import {InServerListComponent} from './in-server/in-server-list/in-server-list.component';
+import {GenderPipe, LevelPipe} from '../pipe';
+
+const AGENCY_PIPE = [
+  GenderPipe,
+  LevelPipe
+];
 
 @NgModule({
   imports: [
@@ -24,6 +30,8 @@ import {InServerListComponent} from './in-server/in-server-list/in-server-list.c
     UpgradeListComponent,
     UpgradeComponent,
     InServerComponent,
-    InServerListComponent]
+    InServerListComponent,
+    ...AGENCY_PIPE
+  ]
 })
 export class AgencyModule { }

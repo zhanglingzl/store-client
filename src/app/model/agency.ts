@@ -9,6 +9,8 @@ export class Agency {
     level: number;
     telephone: number;
     weChatId: string;
+    wechat: string;
+    likeName: string;
     expand: boolean;
     address: string;
     children?: Agency[];

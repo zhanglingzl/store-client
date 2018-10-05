@@ -10,17 +10,20 @@ import {Agency} from '../../../../../model/agency';
 })
 export class JobListComponent implements OnInit {
 
+  isVisible = false;
+  isOkLoading = false;
+  updateLevel = 0;
+  selectId: number;
+
   params: any = {
     name: '',
     telephone: '',
   };
-  expandForm: true;
   data: Agency[] = [];
   expandDataCache = {};
 
   collapse(array: Agency[], data: Agency, $event: boolean): void {
     if ($event === false) {
-      console.log(data.children.length)
       if (data.children && data.children.length > 0) {
         data.children.forEach(d => {
           const target = array.find(a => a.id === d.id);
@@ -59,8 +62,8 @@ export class JobListComponent implements OnInit {
     }
   }
 
-  getData(){
-    this.http.get<RestResponse<Agency[]>>('/agency',this.params).subscribe(response => {
+  getData() {
+    this.http.get<RestResponse<Agency[]>>('/agency', this.params).subscribe(response => {
       this.data = response.result;
       this.data.forEach(item => {
         this.expandDataCache[ item.id ] = this.convertTreeToList(item);
@@ -73,7 +76,32 @@ export class JobListComponent implements OnInit {
     this.getData();
   }
 
-  constructor(private http: _HttpClient){
+  updrade(agency: Agency) {
+    this.updateLevel = agency.level;
+    this.selectId = agency.id;
+    this.showModal();
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    this.isOkLoading = true;
+    this.http.post<RestResponse>('/agency/upgrade', null, {id: this.selectId, level: this.updateLevel})
+             .subscribe(result => {
+               if (result.code === 0) {
+                 this.reset();
+               }
+             });
+    this.isVisible = false;
+    this.isOkLoading = false;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+  constructor(private http: _HttpClient) {
 
   }
   ngOnInit(): void {

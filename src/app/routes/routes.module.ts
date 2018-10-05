@@ -15,7 +15,6 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 import { UserRegisterComponent } from './passport/register/register.component';
 import { RouteRoutingModule } from './routes-routing.module';
 
-
 const COMPONENTS = [
   DashboardComponent,
   // passport pages
@@ -37,8 +36,6 @@ const COMPONENTS_NOROUNT = [];
   declarations: [
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT,
-
-
   ],
   entryComponents: COMPONENTS_NOROUNT
 })
