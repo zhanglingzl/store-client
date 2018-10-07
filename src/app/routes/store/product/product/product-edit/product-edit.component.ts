@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {NzModalRef, NzMessageService, UploadFile, UploadXHRArgs} from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../../../model/product';
 import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 import {Image} from '../../../../../model/image';
+import {RestResponse} from '../../../../../dto';
 
   @Component({
     selector: 'app-product-edit',
@@ -22,6 +23,7 @@ import {Image} from '../../../../../model/image';
     coverList = [];
     previewImage = '';
     previewVisible = false;
+    validProductNo = false;
 
     constructor(
       private modal: NzModalRef,
@@ -73,7 +75,6 @@ import {Image} from '../../../../../model/image';
       this.form.patchValue(this.product);
       this.setImageListByProduct();
       this.setCoverByProduct();
-      console.log(this.fileList, 22);
     }
 
     handlePreview = (file: UploadFile) => {
@@ -148,6 +149,12 @@ import {Image} from '../../../../../model/image';
       file.uid = this.product.cover.substring(0, this.product.cover.lastIndexOf(this.POINT_SEP)) + this.UID_STATUS;
       file.size = 0;
       this.coverList.push(file);
+    }
+
+    uniqueProductNo() {
+      this.http.get<RestResponse<boolean>>('/product/exist/no', {productNo: this.form.controls['productNo'].value}).subscribe(result => {
+        this.validProductNo = result.result  ? null : !result.result;
+      });
     }
     get productNo() {
       return this.form.controls['productNo'];
