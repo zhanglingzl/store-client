@@ -88,7 +88,7 @@ export class JobListComponent implements OnInit {
 
   handleOk(): void {
     this.isOkLoading = true;
-    this.http.post<RestResponse>('/agency/upgrade', null, {id: this.selectId, level: this.updateLevel})
+    this.http.post<RestResponse<string>>('/agency/upgrade', null, {id: this.selectId, level: this.updateLevel})
              .subscribe(result => {
                if (result.code === 0) {
                  this.reset();

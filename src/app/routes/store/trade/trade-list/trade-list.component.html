@@ -1,11 +1,101 @@
 <page-header [title]="'订单查询'"></page-header>
 <nz-card>
-  <sf mode="search" [schema]="searchSchema" [formData]="params" (formSubmit)="submit($event)" (formReset)="st.reset(params)"></sf>
-  <simple-table #st [data]="url" [resReName]="{list: 'result'}"  [columns]="columns" [extraParams]="params" [ps]="2" [scroll]="{x: '2500px'}">
-    <ng-template st-row="shipAddress" let-item let-index="index">
-      <nz-tooltip [nzTitle]="'收货地址：' + item.address">
-        <span nz-tooltip>{{item.province}} {{item.city}} {{item.country}} {{item.address}}</span>
-      </nz-tooltip>
-    </ng-template>
+  <form #form nz-form [nzLayout]="'inline'" (ngSubmit)="getData()" class="search__form">
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item class="pl-md">
+          <nz-form-label  nzFor="agencyName">代理姓名</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.agencyName" name="agencyName" placeholder="请输入">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24" class="pl-md">
+        <nz-form-item>
+          <nz-form-label  nzFor="agencyId">代理ID</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.agencyId" name="agencyId" type="number" placeholder="请输入">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24" class="pl-md">
+        <nz-form-item>
+          <nz-form-label  nzFor="tradeNo">订单编号</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.tradeNo" name="tradeNo" placeholder="请输入">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="8" nzSm="24" class="pl-md">
+        <nz-form-item>
+          <nz-form-label  nzFor="betweenDate">交易时间</nz-form-label>
+          <nz-form-control>
+            <nz-range-picker style="width: 100%" name="betweenDate" [(ngModel)]="params.betweenDate" (ngModelChange)="onChange($event)" nzShowTime></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item class="pl-md">
+          <nz-form-label  nzFor="payStatus">支付状态</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 100%;" nzPlaceHolder="请选择" [(ngModel)]="params.payStatus" name="payStatus">
+              <nz-option *ngFor="let option of payOption" [nzLabel]="option.label" [nzValue]="option.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item class="pl-md">
+          <nz-form-label  nzFor="shipStatus">发货状态</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 100%;" nzPlaceHolder="请选择" [(ngModel)]="params.shipStatus" name="shipStatus">
+              <nz-option nzLabel="未发货" nzValue="0"></nz-option>
+              <nz-option nzLabel="已发货" nzValue="1"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item class="pl-md">
+          <nz-form-label  nzFor="telephone">电话号码</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.telephone" name="telephone" placeholder="请输入">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24" class="pl-md">
+        <nz-form-item>
+          <nz-form-label  nzFor="address">收货信息</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.address" name="address" placeholder="请输入">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24" class="pl-md">
+        <nz-form-item>
+          <nz-form-label  nzFor="trackingNo">物流单号</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.trackingNo" name="trackingNo" placeholder="请输入">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col>
+        <div class="text-center pr-lg">
+          <button nz-button type="submit" [nzType]="'primary'">查询</button>
+          <button nz-button   class="mx-sm" (click)="form.reset()">重置</button>
+        </div>
+      </nz-col>
+    </nz-row>
+  </form>
+  <button nz-button (click)="st.export()">订单下载</button>
+  <simple-table #st [data]="data" [loading]="loading" [total]="total" [columns]="columns" [ps]="10" [scroll]="{x: '2500px'}">
   </simple-table>
 </nz-card>
+
