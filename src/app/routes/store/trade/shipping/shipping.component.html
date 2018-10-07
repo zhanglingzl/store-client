@@ -1,0 +1,44 @@
+<form nz-form [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label nzSpan="5">订单编号</nz-form-label>
+    <nz-form-control nzSpan="19">
+      {{trade.tradeNo}}
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5">收货人</nz-form-label>
+    <nz-form-control nzSpan="19">
+      {{trade.name}}
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5">收货人电话</nz-form-label>
+    <nz-form-control nzSpan="19">
+      {{trade.phone}}
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5">收货地址</nz-form-label>
+    <nz-form-control nzSpan="19">
+      {{trade.province}} {{trade.city}} {{trade.country}} {{trade.address}}
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="trackingName">物流公司</nz-form-label>
+    <nz-form-control nzSpan="19">
+      <input nz-input formControlName="trackingName" id="trackingName">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired nzFor="trackingNo">物流单号</nz-form-label>
+    <nz-form-control nzSpan="19">
+      <input nz-input formControlName="trackingNo" id="trackingNo">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzSpan="19" nzOffset="5">
+      <button nz-button nzType="primary"  [disabled]="form.invalid" (click)="save()">确定</button>
+      <button nz-button nzType="default" (click) = "close()">取消</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
