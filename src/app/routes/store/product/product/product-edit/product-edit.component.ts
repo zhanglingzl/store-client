@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {NzModalRef, NzMessageService, UploadFile, UploadXHRArgs} from 'ng-zorro-antd';
+import {NzModalRef, NzMessageService, UploadFile, UploadXHRArgs, NzModalService} from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../../../model/product';
@@ -24,12 +24,14 @@ import {RestResponse} from '../../../../../dto';
     previewImage = '';
     previewVisible = false;
     validProductNo = false;
+    oldProductNo: string;
 
     constructor(
       private modal: NzModalRef,
       public msg: NzMessageService,
       public http: _HttpClient,
       private fb: FormBuilder,
+      public modalSrv: NzModalService
     ) {}
 
 
@@ -72,9 +74,12 @@ import {RestResponse} from '../../../../../dto';
           ]),
         ],
       });
-      this.form.patchValue(this.product);
-      this.setImageListByProduct();
-      this.setCoverByProduct();
+      if (this.product) {
+        this.form.patchValue(this.product);
+        this.setImageListByProduct();
+        this.setCoverByProduct();
+        this.oldProductNo = this.form.controls['productNo'].value;
+      }
     }
 
     handlePreview = (file: UploadFile) => {
@@ -114,9 +119,16 @@ import {RestResponse} from '../../../../../dto';
     }
 
     save() {
-      this.product = Object.assign(this.product == null ? new Product() : this.product, this.form.value);
-      this.setProductCoverAndImages();
-      this.modal.triggerOk();
+      this.http.get<RestResponse<boolean>>('/product/exist/no', {productNo: this.form.controls['productNo'].value}).subscribe(result => {
+        this.validProductNo = result.result == null  ? null : !result.result;
+        if (this.validProductNo || this.oldProductNo === this.form.controls['productNo'].value) {
+          this.product = Object.assign(this.product == null ? new Product() : this.product, this.form.value);
+          this.setProductCoverAndImages();
+          this.modal.triggerOk();
+        } else {
+          this.error();
+        }
+      });
     }
 
     close() {
@@ -154,6 +166,13 @@ import {RestResponse} from '../../../../../dto';
     uniqueProductNo() {
       this.http.get<RestResponse<boolean>>('/product/exist/no', {productNo: this.form.controls['productNo'].value}).subscribe(result => {
         this.validProductNo = result.result  ? null : !result.result;
+      });
+    }
+
+    error(): void {
+      this.modalSrv.error({
+        nzTitle: '商品编号不能重复',
+        nzOnOk: () => console.log('Info OK')
       });
     }
     get productNo() {

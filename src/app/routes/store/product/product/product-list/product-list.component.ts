@@ -63,9 +63,9 @@ export class ProductListComponent implements OnInit {
       },
     });
   }
-  remove(id) {
+  remove(item) {
     this.http
-      .delete('/product/delete', { id: id })
+      .post('/product/delete', item)
       .subscribe(() => {
         this.getData();
       });
