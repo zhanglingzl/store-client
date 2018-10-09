@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-agency',
   template: `<router-outlet></router-outlet>`,
 })
-export class AgencyComponent implements OnInit {
+export class RepertoryComponent implements OnInit {
 
   constructor() { }
 

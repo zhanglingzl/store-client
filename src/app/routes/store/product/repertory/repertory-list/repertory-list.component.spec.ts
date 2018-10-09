@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AgencyListComponent } from './agency-list.component';
+import { RepertoryListComponent } from './repertory-list.component';
 
-describe('AgencyListComponent', () => {
-  let component: AgencyListComponent;
-  let fixture: ComponentFixture<AgencyListComponent>;
+describe('RepertoryListComponent', () => {
+  let component: RepertoryListComponent;
+  let fixture: ComponentFixture<RepertoryListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AgencyListComponent ]
+      declarations: [ RepertoryListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AgencyListComponent);
+    fixture = TestBed.createComponent(RepertoryListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,9 +5,9 @@ import { SFSchema } from '@delon/form';
 
 @Component({
   selector: 'app-agency-list',
-  templateUrl: './agency-list.component.html',
+  templateUrl: './repertory-list.component.html',
 })
-export class AgencyListComponent implements OnInit {
+export class RepertoryListComponent implements OnInit {
 
     params: any = {};
     url = `/agency`;
@@ -21,16 +21,9 @@ export class AgencyListComponent implements OnInit {
     };
     @ViewChild('st') st: SimpleTableComponent;
     columns: SimpleTableColumn[] = [
-      { title: '姓名', index: 'name' },
-      { title: '类型', index: 'agencyType' },
-      { title: '性别', width: '50px', index: 'gender' },
-      { title: '手机号', index: 'telephone' },
-      { title: '微信号', index: 'weChatNo' },
-      { title: '身份证号', index: 'cardNo' },
-      { title: '公司', index: 'company' },
-      { title: '地址', index: 'address' },
-      { title: '邮箱', index: 'email' },
-      { title: '时间', type: 'date', index: 'updatedAt' },
+      { title: '商品编号', index: 'productNo' },
+      { title: '商品名称', index: 'productName' },
+      { title: '库存', index: 'repertory' },
       {
         title: '',
         buttons: [

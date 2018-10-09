@@ -45,6 +45,10 @@
           {
             "text": "商品展示",
             "link": "/product"
+          },
+          {
+            "text": "商品库存",
+            "link": "/product/repertory"
           }
         ]
       }
