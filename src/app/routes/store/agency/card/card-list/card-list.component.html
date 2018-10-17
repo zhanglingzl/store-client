@@ -1,0 +1,89 @@
+<page-header [title]="''">
+  <form nz-form [nzLayout]="'inline'" (ngSubmit)="getData()" class="search__form">
+    <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label  nzFor="name">姓名</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.name" name="name" placeholder="请输入" id="name">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label  nzFor="telephone">手机号</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.telephone" name="telephone" placeholder="请输入" id="telephone">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <button nz-button type="submit" [nzType]="'primary'">查询</button>
+      <button nz-button   class="mx-sm" (click)="reset()">重置</button>
+    </nz-row>
+  </form>
+</page-header>
+
+<nz-list [nzLoading]="loading" [nzDataSource]="list" [nzRenderItem]="item" [nzGrid]="{gutter: 24, lg: 8, md: 12, sm: 24, xs: 24 }">
+  <ng-template #item let-item>
+    <nz-list-item>
+      <button *ngIf="item === null" nz-button (click)="msg.success('add')" [nzType]="'dashed'" style="width: 100%; height: 183px;">
+        <i class="anticon anticon-plus"></i>
+        <span>新增代理</span>
+      </button>
+      <nz-card nzHoverable *ngIf="item !== null" [nzActions]="[op1, op2, op3]" style="width: 90%;">
+        <ng-template #op1>
+          <nz-tooltip [nzTitle]="'代理升级'">
+            <i nz-tooltip class="anticon anticon-to-top" (click)="updrade(item)"></i>
+          </nz-tooltip>
+        </ng-template>
+        <ng-template #op2>
+          <nz-tooltip [nzTitle]="'上级变更'">
+            <i nz-tooltip class="anticon anticon-home" (click)="changeParent(item)"></i>
+          </nz-tooltip>
+        </ng-template>
+        <ng-template #op3>
+          <nz-tooltip [nzTitle]="'查看详情'">
+            <i nz-tooltip class="anticon anticon-info-circle-o" (click)="msg.success('此功能正在开发');"></i>
+          </nz-tooltip>
+        </ng-template>
+        <nz-card-meta [nzAvatar]="nzAvatar" [nzTitle]="nzTitle" [nzDescription]="nzDescription">
+          <ng-template #nzAvatar>
+            <nz-avatar nzSize="large" [nzSrc]="item.avatar"></nz-avatar>
+          </ng-template>
+          <ng-template #nzTitle>
+            <a>{{'编号：' + item.id}}</a>
+          </ng-template>
+          <ng-template #nzDescription>
+            <ellipsis>{{'姓名：' + (item.name == null ? '未填写' : item.name)}}</ellipsis>
+            <ellipsis>{{'微信名：' + (item.likeName == null ? '未填写' : item.likeName)}}</ellipsis>
+            <ellipsis>{{'联系方式：' + (item.telephone == null ? '未填写' : item.telephone)}}</ellipsis>
+          </ng-template>
+        </nz-card-meta>
+      </nz-card>
+    </nz-list-item>
+  </ng-template>
+</nz-list>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="代理升级" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-form-label nzSpan="5" nzRequired>代理等级</nz-form-label>
+  <nz-form-control [nzSpan]="19">
+    <nz-select style="width: 100%;" [(ngModel)]="updateLevel">
+      <nz-option [nzLabel]="'普通会员'" [nzValue]="0"></nz-option>
+      <nz-option [nzLabel]="'琥珀'" [nzValue]="1"></nz-option>
+      <nz-option [nzLabel]="'水晶'" [nzValue]="2"></nz-option>
+      <nz-option [nzLabel]="'欧珀'" [nzValue]="3"></nz-option>
+      <nz-option [nzLabel]="'红宝石'" [nzValue]="4"></nz-option>
+      <nz-option [nzLabel]="'翡翠'" [nzValue]="5"></nz-option>
+      <nz-option [nzLabel]="'钻石'" [nzValue]="6"></nz-option>
+    </nz-select>
+  </nz-form-control>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isChangeVisible" nzTitle="上级变更" (nzOnCancel)="changeHandleCancel()" (nzOnOk)="changeHandleOk()">
+  <nz-form-label nzSpan="5" nzRequired>会员编号</nz-form-label>
+  <nz-form-control [nzSpan]="19">
+      <nz-form-control>
+        <input nz-input [(ngModel)]="parentId" name="parentId" placeholder="请输入" id="parentId">
+      </nz-form-control>
+  </nz-form-control>
+</nz-modal>

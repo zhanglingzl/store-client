@@ -13,9 +13,13 @@ export class RepertoryListComponent implements OnInit {
     url = `/agency`;
     searchSchema: SFSchema = {
       properties: {
-        name: {
+        productNo: {
           type: 'string',
-          title: '姓名'
+          title: '商品编号'
+        },
+        productName: {
+          type: 'string',
+          title: '商品名称'
         },
       }
     };

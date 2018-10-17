@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuasiListComponent } from './quasi-list.component';
+import { CardListComponent } from './card-list.component';
 
 describe('QuasiListComponent', () => {
-  let component: QuasiListComponent;
-  let fixture: ComponentFixture<QuasiListComponent>;
+  let component: CardListComponent;
+  let fixture: ComponentFixture<CardListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuasiListComponent ]
+      declarations: [ CardListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuasiListComponent);
+    fixture = TestBed.createComponent(CardListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

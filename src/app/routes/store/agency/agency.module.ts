@@ -4,8 +4,8 @@ import { AgencyRoutingModule } from './agency-routing.module';
 import { JobComponent } from './job/job.component';
 import {JobListComponent} from './job/job-list/job-list.component';
 import {SharedModule} from '../../../shared/shared.module';
-import { QuasiComponent } from './quasi/quasi.component';
-import { QuasiListComponent } from './quasi/quasi-list/quasi-list.component';
+import { CardComponent } from './card/card.component';
+import { CardListComponent } from './card/card-list/card-list.component';
 import { UpgradeListComponent } from './upgrade/upgrade-list/upgrade-list.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {InServerComponent} from './in-server/in-server.component';
@@ -25,8 +25,8 @@ const AGENCY_PIPE = [
   declarations: [
     JobComponent,
     JobListComponent,
-    QuasiComponent,
-    QuasiListComponent,
+    CardComponent,
+    CardListComponent,
     UpgradeListComponent,
     UpgradeComponent,
     InServerComponent,
