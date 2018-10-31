@@ -11,6 +11,10 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import {InServerComponent} from './in-server/in-server.component';
 import {InServerListComponent} from './in-server/in-server-list/in-server-list.component';
 import {GenderPipe, LevelPipe} from '../pipe';
+import {AgencyCenterComponent} from './center/center.component';
+import {AgencyCenterApplicationsComponent} from './center/applications/applications.component';
+import {AgencyCenterArticlesComponent} from './center/articles/articles.component';
+import {AgencyCenterProjectsComponent} from './center/projects/projects.component';
 
 const AGENCY_PIPE = [
   GenderPipe,
@@ -31,7 +35,11 @@ const AGENCY_PIPE = [
     UpgradeComponent,
     InServerComponent,
     InServerListComponent,
-    ...AGENCY_PIPE
+    ...AGENCY_PIPE,
+    AgencyCenterComponent,
+    AgencyCenterApplicationsComponent,
+    AgencyCenterArticlesComponent,
+    AgencyCenterProjectsComponent
   ]
 })
 export class AgencyModule { }

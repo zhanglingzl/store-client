@@ -1,0 +1,35 @@
+<div nz-row nzGutter="24" class="py-lg">
+  <div nz-col nzMd="24" nzLg="7">
+    <nz-card [nzBordered]="false" class="mb-lg" [nzLoading]="!agency">
+      <ng-container *ngIf="agency">
+        <div class="avatarHolder">
+          <img src="{{agency.avatar}}">
+          <div class="name">{{agency.name}}</div>
+          <!--<div>{{user.signature}}</div>-->
+        </div>
+        <div class="detail">
+          <p><i class="title"></i>微信名：{{agency.wechat}}</p>
+          <p><i class="group"></i>联系方式：{{agency.telephone}}</p>
+          <div *ngFor="let tradingVolume of tradingVolumeList">
+            <p>
+              <i class="none anticon anticon-bar-chart"></i>
+              日期：{{tradingVolume.date}}
+            </p>
+            <p>下级购买总量：{{tradingVolume.totalCount}}</p>
+            <p>下级购买总金额：{{tradingVolume.totalAmount}}</p>
+          </div>
+        </div>
+      </ng-container>
+    </nz-card>
+  </div>
+  <div nz-col nzMd="24" nzLg="17">
+    <nz-card class="tabsCard" [nzBordered]="false" [nzTitle]="tagTitleTpl">
+      <ng-template #tagTitleTpl>
+        <nz-tabset nzSize="large" [nzSelectedIndex]="pos">
+          <nz-tab *ngFor="let i of tabs" [nzTitle]="i.tab" (nzClick)="to(i)"></nz-tab>
+        </nz-tabset>
+      </ng-template>
+      <router-outlet></router-outlet>
+    </nz-card>
+  </div>
+</div>

@@ -1,7 +1,15 @@
 <page-header [title]="''">
-  <form nz-form [nzLayout]="'inline'" (ngSubmit)="getData()" class="search__form">
+  <form nz-form [nzLayout]="'inline'" class="search__form">
     <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
-      <nz-col nzMd="8" nzSm="24">
+      <nz-col nzMd="6" nzSm="24">
+        <nz-form-item>
+          <nz-form-label  nzFor="agencyId">会员编号</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="params.id" name="agencyId" placeholder="请输入" id="agencyId">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col nzMd="6" nzSm="24">
         <nz-form-item>
           <nz-form-label  nzFor="name">姓名</nz-form-label>
           <nz-form-control>
@@ -9,7 +17,7 @@
           </nz-form-control>
         </nz-form-item>
       </nz-col>
-      <nz-col nzMd="8" nzSm="24">
+      <nz-col nzMd="6" nzSm="24">
         <nz-form-item>
           <nz-form-label  nzFor="telephone">手机号</nz-form-label>
           <nz-form-control>
@@ -17,7 +25,7 @@
           </nz-form-control>
         </nz-form-item>
       </nz-col>
-      <button nz-button type="submit" [nzType]="'primary'">查询</button>
+      <button nz-button type="submit" [nzType]="'primary'" (click)="getData()">查询</button>
       <button nz-button   class="mx-sm" (click)="reset()">重置</button>
     </nz-row>
   </form>
@@ -43,7 +51,7 @@
         </ng-template>
         <ng-template #op3>
           <nz-tooltip [nzTitle]="'查看详情'">
-            <i nz-tooltip class="anticon anticon-info-circle-o" (click)="msg.success('此功能正在开发');"></i>
+            <i nz-tooltip class="anticon anticon-info-circle-o" (click)="view(item)"></i>
           </nz-tooltip>
         </ng-template>
         <nz-card-meta [nzAvatar]="nzAvatar" [nzTitle]="nzTitle" [nzDescription]="nzDescription">

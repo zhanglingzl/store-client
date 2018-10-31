@@ -1,4 +1,3 @@
-import {Answer} from './answer';
 
 export class Agency {
     id?: number;
@@ -14,5 +13,5 @@ export class Agency {
     expand: boolean;
     address: string;
     children?: Agency[];
-    answer?: Answer;
+    avatar: string;
 }
