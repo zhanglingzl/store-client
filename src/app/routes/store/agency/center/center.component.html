@@ -2,6 +2,9 @@
   <div nz-col nzMd="24" nzLg="7">
     <nz-card [nzBordered]="false" class="mb-lg" [nzLoading]="!agency">
       <ng-container *ngIf="agency">
+        <div class="d-flex pt-md">
+          <a routerLink="/agency/card"  routerLinkActive="active" class="d-flex">返回</a>
+        </div>
         <div class="avatarHolder">
           <img src="{{agency.avatar}}">
           <div class="name">{{agency.name}}</div>

@@ -80,7 +80,11 @@ export class AgencyCenterComponent implements OnInit, OnDestroy {
   }
 
   to(item: any) {
-    this.router.navigateByUrl(`/agency/card/center/${item.key}`);
+    this.router.navigateByUrl(`/agency/card/center/${item.key}`, {
+      queryParams: {
+        id: this.agency.id
+      }
+    });
   }
 
   taging = false;

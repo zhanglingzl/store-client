@@ -1,14 +1,14 @@
-<nz-list nzItemLayout="vertical" [nzLoading]="!list">
+<!--<nz-list nzItemLayout="vertical" [nzLoading]="!list">
   <nz-list-item *ngFor="let item of list" [nzContent]="nzContent" [nzActions]="[op1,op2,op3]">
     <ng-template #op1>
-      <i class="anticon anticon-star-o mr-sm"></i>{{item.star}}</ng-template>
+      <i class="anticon anticon-star-o mr-sm"></i>{{item.name}}</ng-template>
     <ng-template #op2>
-      <i class="anticon anticon-like-o mr-sm"></i>{{item.like}}</ng-template>
+      <i class="anticon anticon-like-o mr-sm"></i>{{item.name}}</ng-template>
     <ng-template #op3>
-      <i class="anticon anticon-message mr-sm"></i>{{item.message}}</ng-template>
+      <i class="anticon anticon-message mr-sm"></i>{{item.name}}</ng-template>
     <nz-list-item-meta [nzTitle]="nzTitle" [nzDescription]="nzDescription">
       <ng-template #nzTitle>
-        <a href="{{item.href}}" target="_blank">{{item.title}}</a>
+        <a href="{{item.name}}" target="_blank">{{item.name}}</a>
       </ng-template>
       <ng-template #nzDescription>
         <nz-tag>Alain</nz-tag>
@@ -17,14 +17,49 @@
       </ng-template>
     </nz-list-item-meta>
     <ng-template #nzContent>
-      <p>{{item.content}}</p>
+      <p>{{item.name}}</p>
       <div class="mt-md d-flex">
         <nz-avatar [nzSrc]="item.avatar" [nzSize]="'small'" class="mr-sm"></nz-avatar>
-        <a href="{{item.href}}" target="_blank">{{item.owner}}</a>
+        <a href="{{item.name}}" target="_blank">{{item.owner}}</a>
         <span class="px-sm">发布在</span>
-        <a href="{{item.href}}" target="_blank">{{item.href}}</a>
-        <time class="pl-md text-grey" title="{{item.updatedAt}}">{{item.updatedAt | _date}}</time>
+        <a href="{{item.name}}" target="_blank">{{item.name}}</a>
+        <time class="pl-md text-grey" title="{{item.name}}">{{item.name}}</time>
       </div>
     </ng-template>
   </nz-list-item>
+</nz-list>-->
+
+<nz-list [nzDataSource]="list" [nzLoading]="!list" [nzRenderItem]="item" [nzPagination]="pagination">
+  <ng-template #item let-item>
+    <nz-list-item [nzContent]="nzContent" [nzActions]="[edit]">
+      <ng-template #edit>
+        <a (click)="msg.success('编辑：' + item.title)">查看下级</a>
+      </ng-template>
+      <nz-list-item-meta [nzTitle]="nzTitle" [nzDescription]="item.telephone == null ? '未填写' : item.telephone" [nzAvatar]="nzAvatar">
+        <ng-template #nzTitle>
+          <a href="{{item.href}}" target="_blank">{{item.name == null ? '未填写' : item.name}}</a>
+        </ng-template>
+        <ng-template #nzAvatar>
+          <nz-avatar [nzSrc]="item.avatar" nzSize="large" [nzShape]="'square'"></nz-avatar>
+        </ng-template>
+      </nz-list-item-meta>
+      <ng-template #nzContent>
+        <div class="width-md">
+          <div class="d-flex text-grey-dark">
+            <div class="flex-1">
+              微信名
+              <p>{{item.likeName == null ? '未填写' : item.likeName}}</p>
+            </div>
+            <div class="text-right">
+              代理等级
+              <p>{{item.level | levelPipe}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </nz-list-item>
+  </ng-template>
+  <ng-template #pagination>
+    <nz-pagination [nzTotal]="50" [nzPageSize]="5" (nzPageIndexChange)="getData()"></nz-pagination>
+  </ng-template>
 </nz-list>
